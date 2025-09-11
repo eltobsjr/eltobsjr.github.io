@@ -7,12 +7,12 @@ export const siteConfig = {
   ogImage: "https://eltoborges.dev/og.jpg", // Replace with actual OG image URL
   description: "Portfólio de Elto Borges, Desenvolvedor Full Stack.",
   links: {
-    github: "https://github.com/eltobrgs",
+    github: "https://github.com/eltobsjr",
     linkedin: "https://www.linkedin.com/in/elto-borges-5b90962a8?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
-    instagram: "https://www.instagram.com/eltobrgs/",
-    youtube: "https://www.youtube.com/@eltobrgs",
+    instagram: "https://www.instagram.com/eltobsjr/",
+    youtube: "https://www.youtube.com/@eltobsjr",
     whatsapp: "https://wa.link/w6d9rf",
-    email: "mailto:eltobrgs@gmail.com",
+    email: "mailto:eltobsjr.developer@gmail.com",
   },
   hero: {
     title: "Hi!! I'm Elto Borges 🇧🇷💻",
@@ -77,8 +77,8 @@ export const siteConfig = {
       name: "RFSmart Platform",
       description: "Plataforma de cursos online com frontend moderno (React, TypeScript, Vite) e backend robusto (Node.js, Express, Prisma).",
       technologies: ["React", "TypeScript", "Vite", "Tailwind CSS", "React Router DOM", "Framer Motion", "Node.js", "Express", "Prisma", "JWT"],
-      frontendRepoUrl: "https://github.com/eltobrgs/FrontEnd-RFSmartReact",
-      backendRepoUrl: "https://github.com/eltobrgs/BackEnd-RFSmart",
+      frontendRepoUrl: "https://github.com/eltobsjr/FrontEnd-RFSmartReact",
+      backendRepoUrl: "https://github.com/eltobsjr/BackEnd-RFSmart",
       liveUrl: "https://front-end-rf-smart-react.vercel.app",
       imageUrl: "/images/RF/RF1.png",
       imageHint: "e-learning platform",
@@ -98,8 +98,8 @@ export const siteConfig = {
       name: "UGym Landing Page",
       description: "Landing page promocional para o aplicativo UGym, construída com foco em design responsivo e otimizada para conversão.",
       technologies: ["Next.js", "Tailwind CSS"],
-      repoUrl: "https://github.com/eltobrgs/LandingPageUgym",
-      liveUrl: "https://eltobrgs.github.io/LandingPageUgym/",
+      repoUrl: "https://github.com/eltobsjr/LandingPageUgym",
+      liveUrl: "https://eltobsjr.github.io/LandingPageUgym/",
       imageUrl: "/images/UgymLandingPage/landingugym1.png",
       imageHint: "website landing page",
       images: [
@@ -112,7 +112,7 @@ export const siteConfig = {
       name: "Sistema de Gerenciamento de Biblioteca",
       description: "Sistema de gerenciamento de biblioteca com frontend em HTML, Bootstrap CSS, e backend com Spring Boot, conectado ao banco de dados MongoDB.",
       technologies: ["Java", "Spring Boot", "MongoDB", "Thymeleaf", "HTML", "Bootstrap CSS", "Maven"],
-      repoUrl: "https://github.com/eltobrgs/SpringBoot-sistemabiblioteca",
+      repoUrl: "https://github.com/eltobsjr/SpringBoot-sistemabiblioteca",
       imageUrl: "/images/biblioteca/biblioteca1.png",
       imageHint: "library management system",
       images: [
@@ -125,8 +125,8 @@ export const siteConfig = {
       name: "MedicSystem - Gerenciador de Clínica",
       description: "Gerenciador de clínica médica que organiza documentos, cadastra médicos/pacientes e agenda consultas. Frontend (React, TS) e Backend (Node.js, Prisma).",
       technologies: ["React", "TypeScript", "Vite", "Tailwind CSS", "Node.js", "Express", "Prisma", "JWT", "Framer Motion"],
-      frontendRepoUrl: "https://github.com/eltobrgs/FrontEnd-MedicSystem",
-      backendRepoUrl: "https://github.com/eltobrgs/BackEnd-MedicSystem",
+      frontendRepoUrl: "https://github.com/eltobsjr/FrontEnd-MedicSystem",
+      backendRepoUrl: "https://github.com/eltobsjr/BackEnd-MedicSystem",
       imageUrl: "/images/medicsys/medicsys1.png",
       imageHint: "clinic management app",
       images: [
@@ -139,8 +139,8 @@ export const siteConfig = {
       name: "Explorador Interativo do Sistema Digestivo",
       description: "Projeto educativo sobre o sistema digestivo, incluindo quiz interativo e esquema 3D. Desenvolvido com Next.js, TypeScript e Tailwind CSS para um trabalho escolar.",
       technologies: ["Next.js", "TypeScript", "Tailwind CSS"],
-      repoUrl: "https://github.com/eltobrgs/SistemaDigestivoInterativo",
-      liveUrl: "https://eltobrgs.github.io/SistemaDigestivoInterativo/",
+      repoUrl: "https://github.com/eltobsjr/SistemaDigestivoInterativo",
+      liveUrl: "https://eltobsjr.github.io/SistemaDigestivoInterativo/",
       imageUrl: "/images/SistemaDigestorio/SistemaDigestorio1.png",
       imageHint: "digestive system anatomy",
       images: [
@@ -153,7 +153,7 @@ export const siteConfig = {
   contactLinks: [
     {
       name: "Gmail",
-      url: "mailto:eltobrgs@gmail.com",
+      url: "mailto:eltobsjr.developer@gmail.com",
       icon: "Mail"
     },
     {
@@ -163,12 +163,12 @@ export const siteConfig = {
     },
     {
       name: "Instagram",
-      url: "https://www.instagram.com/eltobrgs/",
+      url: "https://www.instagram.com/eltobsjr/",
       icon: "Instagram"
     },
     {
       name: "YouTube",
-      url: "https://www.youtube.com/@eltobrgs",
+      url: "https://www.youtube.com/@eltobsjr",
       icon: "Youtube"
     },
     {
@@ -178,7 +178,7 @@ export const siteConfig = {
     },
     {
       name: "GitHub",
-      url: "https://github.com/eltobrgs",
+      url: "https://github.com/eltobsjr",
       icon: "Github"
     }
   ] as ContactLink[]
