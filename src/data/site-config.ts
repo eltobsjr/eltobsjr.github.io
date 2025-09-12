@@ -3,15 +3,15 @@ import type { Project, TechCategory, ContactLink } from '@/types';
 
 export const siteConfig = {
   name: "Elto Borges",
-  url: "https://eltoborges.dev", // Replace with actual domain later
-  ogImage: "https://eltoborges.dev/og.jpg", // Replace with actual OG image URL
+  url: "https://eltobsjr.github.io/", // Replace with actual domain later
+  ogImage: "https://eltobsjr.github.io/og.jpg", // Replace with actual OG image URL
   description: "Portfólio de Elto Borges, Desenvolvedor Full Stack.",
   links: {
     github: "https://github.com/eltobsjr",
-    linkedin: "https://www.linkedin.com/in/elto-borges-5b90962a8?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+    linkedin: "www.linkedin.com/in/elto-borges-8730b8384",
     instagram: "https://www.instagram.com/eltobsjr/",
     youtube: "https://www.youtube.com/@eltobsjr",
-    whatsapp: "https://wa.link/w6d9rf",
+    whatsapp: "https://wa.me/5589994127883?text=Ol%C3%A1,%20Elto!%20Vim%20pelo%20seu%20GITHUB",
     email: "mailto:eltobsjr.developer@gmail.com",
   },
   hero: {
