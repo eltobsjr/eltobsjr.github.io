@@ -276,7 +276,7 @@ body {
   padding-top: 2px;
 }
 .item .year .now { color: #7c3aed; font-weight: 700; }
-.item .iright {}
+
 .item .iright .ititle {
   font-family: "Space Grotesk", sans-serif;
   font-size: 13px;
@@ -432,7 +432,8 @@ body.dark .cv-foot .fl { color: #333; }
     <button id="btn-light" class="active" onclick="setTheme('light')">Claro (Print)</button>
     <button id="btn-dark" onclick="setTheme('dark')">Dark</button>
   </div>
-  <button onclick="window.print()">Imprimir / Salvar PDF</button>
+  <button onclick="window.print()">Imprimir</button>
+  <button onclick="exportPDF('cv', 'curriculo-elto-borges.pdf')">Exportar PDF</button>
   <button class="alt" onclick="exportPNG('cv', 'curriculo-elto-borges.png')">Exportar PNG</button>
 </div>
 
@@ -658,12 +659,28 @@ body.dark .cv-foot .fl { color: #333; }
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
 <script>
 function setTheme(t) {
   document.body.classList.toggle("dark", t === "dark");
   document.body.classList.toggle("light", t === "light");
   document.getElementById("btn-light").classList.toggle("active", t === "light");
   document.getElementById("btn-dark").classList.toggle("active", t === "dark");
+}
+
+async function exportPDF(id, filename) {
+  const node = document.getElementById(id);
+  const isDark = document.body.classList.contains("dark");
+  const canvas = await html2canvas(node, {
+    backgroundColor: isDark ? "#080808" : "#ffffff",
+    scale: 3,
+    useCORS: true,
+    logging: false,
+  });
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
+  pdf.addImage(canvas.toDataURL("image/jpeg", 0.95), "JPEG", 0, 0, 210, 297);
+  pdf.save(filename);
 }
 
 async function exportPNG(id, filename) {
