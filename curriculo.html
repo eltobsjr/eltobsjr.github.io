@@ -1,0 +1,688 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>Currículo — Elto Borges</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #d0d0d0; }
+body {
+  font-family: "JetBrains Mono", monospace;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 40px 20px;
+  min-height: 100vh;
+}
+
+/* ── TOOLBAR ── */
+.toolbar {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.toolbar button {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 10px 18px;
+  background: #050505;
+  color: #fff;
+  border: 0;
+  cursor: pointer;
+  font-weight: 600;
+}
+.toolbar button.alt { background: #fff; color: #050505; border: 1px solid #050505; }
+.toolbar .switch { display: inline-flex; border: 1px solid #050505; }
+.toolbar .switch button { background: #fff; color: #050505; font-weight: 500; border-right: 1px solid #050505; }
+.toolbar .switch button:last-child { border-right: 0; }
+.toolbar .switch button.active { background: #050505; color: #fff; }
+
+/* ── A4 SHELL (794 × 1123 px @ 96 dpi) ── */
+.cv {
+  width: 794px;
+  height: 1123px;
+  position: relative;
+  overflow: hidden;
+  background: #ffffff;
+  color: #050505;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.28);
+  display: flex;
+  flex-direction: column;
+}
+
+/* corner brackets */
+.bracket { position: absolute; width: 28px; height: 28px; z-index: 5; }
+.bracket.tl { top: 24px; left: 24px; border-top: 2px solid #050505; border-left: 2px solid #050505; }
+.bracket.tr { top: 24px; right: 24px; border-top: 2px solid #050505; border-right: 2px solid #050505; }
+.bracket.bl { bottom: 24px; left: 24px; border-bottom: 2px solid #050505; border-left: 2px solid #050505; }
+.bracket.br { bottom: 24px; right: 24px; border-bottom: 2px solid #050505; border-right: 2px solid #050505; }
+
+/* ── HEADER BAR ── */
+.cv-head {
+  padding: 28px 40px 20px;
+  border-bottom: 2px solid #050505;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+.cv-head .name {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 52px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: #050505;
+}
+.cv-head .name .ac { color: #7c3aed; }
+.cv-head-right {
+  text-align: right;
+}
+.cv-head .role {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #7c3aed;
+  margin-bottom: 4px;
+}
+.cv-head .meta {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: #666;
+  font-weight: 500;
+}
+.dot-ac { color: #7c3aed; }
+
+/* ── BODY SPLIT ── */
+.cv-body {
+  display: grid;
+  grid-template-columns: 210px 1fr;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* ── LEFT SIDEBAR ── */
+.cv-sidebar {
+  padding: 24px 20px 24px 40px;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: #fafafa;
+}
+
+.photo-wrap {
+  position: relative;
+  width: 130px;
+  height: 130px;
+  flex-shrink: 0;
+}
+.photo-wrap img {
+  width: 130px;
+  height: 130px;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  filter: grayscale(20%) contrast(1.02);
+}
+
+.side-section-title {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #050505;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #050505;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.side-section-title::before {
+  content: "//";
+  color: #7c3aed;
+  font-size: 10px;
+}
+
+.contact-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.contact-list li {
+  font-size: 9.5px;
+  color: #333;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  line-height: 1.4;
+  word-break: break-all;
+}
+.contact-list .icon {
+  color: #7c3aed;
+  flex-shrink: 0;
+  font-style: normal;
+  font-size: 10px;
+  margin-top: 0.5px;
+}
+
+.skill-group {
+  margin-bottom: 10px;
+}
+.skill-group-label {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 5px;
+}
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.skill-tag {
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  padding: 2px 6px;
+  background: #050505;
+  color: #fff;
+  text-transform: uppercase;
+}
+.skill-tag.ac { background: #7c3aed; }
+
+.side-stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0;
+  border-bottom: 1px solid #eee;
+}
+.side-stat .sk { font-size: 9px; color: #888; letter-spacing: 0.1em; text-transform: uppercase; }
+.side-stat .sv { font-family: "Space Grotesk", sans-serif; font-size: 13px; font-weight: 700; color: #050505; }
+.side-stat .sv.ac { color: #7c3aed; }
+
+/* ── RIGHT MAIN ── */
+.cv-main {
+  padding: 24px 36px 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  overflow: hidden;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.section-header .num {
+  font-size: 9px;
+  color: #999;
+  letter-spacing: 0.14em;
+}
+.section-header .label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #050505;
+}
+.section-header::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #ddd;
+}
+
+/* summary */
+.summary-text {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: #222;
+  font-weight: 400;
+}
+.summary-text strong { color: #7c3aed; font-weight: 700; }
+
+/* experience / education items */
+.item {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 0 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.item:last-child { border-bottom: 0; }
+.item .year {
+  font-size: 9px;
+  color: #888;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+  padding-top: 2px;
+}
+.item .year .now { color: #7c3aed; font-weight: 700; }
+.item .iright {}
+.item .iright .ititle {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #050505;
+  letter-spacing: -0.01em;
+  margin-bottom: 2px;
+}
+.item .iright .iorg {
+  font-size: 9.5px;
+  color: #666;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+.item .iright .idesc {
+  font-size: 9.5px;
+  color: #555;
+  line-height: 1.5;
+}
+.item .iright .itags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  margin-top: 5px;
+}
+.item .iright .itag {
+  font-size: 8px;
+  font-weight: 600;
+  padding: 1px 5px;
+  border: 1px solid #ddd;
+  color: #666;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.item .iright .itag.hi { border-color: #7c3aed; color: #7c3aed; }
+
+/* projects grid */
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.proj-card {
+  padding: 10px 12px;
+  border: 1px solid #e8e8e8;
+  border-left: 2px solid #7c3aed;
+}
+.proj-card .ptitle {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: #050505;
+  margin-bottom: 3px;
+  letter-spacing: -0.01em;
+}
+.proj-card .pdesc {
+  font-size: 9px;
+  color: #555;
+  line-height: 1.5;
+  margin-bottom: 5px;
+}
+.proj-card .ptags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+}
+.proj-card .ptag {
+  font-size: 7.5px;
+  font-weight: 600;
+  padding: 1px 4px;
+  background: #f0f0f0;
+  color: #444;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.proj-card.featured { border-left-color: #7c3aed; border-color: #ede9fb; background: #f9f8ff; }
+.proj-card.featured .ptag { background: #ebebeb; }
+
+/* ── FOOTER ── */
+.cv-foot {
+  padding: 10px 40px;
+  border-top: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+  background: #fafafa;
+}
+.cv-foot .fl { font-size: 9px; color: #888; letter-spacing: 0.12em; }
+.cv-foot .fc { font-size: 9px; color: #7c3aed; font-weight: 700; letter-spacing: 0.06em; }
+
+/* ─────────────── DARK MODE ─────────────── */
+body.dark { background: #1a1a1a; }
+body.dark .toolbar .switch { border-color: #444; }
+body.dark .toolbar .switch button { background: #111; color: #aaa; border-right-color: #444; }
+body.dark .toolbar .switch button.active { background: #7c3aed; color: #fff; border-color: #7c3aed; }
+body.dark .toolbar button.alt { background: #111; color: #aaa; border-color: #444; }
+
+body.dark .cv { background: #080808; color: #e8e8e8; }
+body.dark .bracket.tl, body.dark .bracket.tr,
+body.dark .bracket.bl, body.dark .bracket.br { border-color: #7c3aed; }
+
+body.dark .cv-head { border-bottom-color: #222; }
+body.dark .cv-head .name { color: #f0f0f0; }
+body.dark .cv-head .meta { color: #555; }
+
+body.dark .cv-sidebar { background: #0e0e0e; border-right-color: #1e1e1e; }
+body.dark .side-section-title { color: #aaa; border-bottom-color: #333; }
+body.dark .contact-list li { color: #888; }
+body.dark .skill-tag { background: #222; color: #ccc; }
+body.dark .skill-tag.ac { background: #7c3aed; color: #fff; }
+body.dark .skill-group-label { color: #555; }
+body.dark .side-stat { border-bottom-color: #1a1a1a; }
+body.dark .side-stat .sk { color: #555; }
+body.dark .side-stat .sv { color: #ddd; }
+
+body.dark .section-header .label { color: #ccc; }
+body.dark .section-header::after { background: #222; }
+body.dark .section-header .num { color: #444; }
+body.dark .summary-text { color: #aaa; }
+
+body.dark .item { border-bottom-color: #151515; }
+body.dark .item .year { color: #444; }
+body.dark .item .iright .ititle { color: #e8e8e8; }
+body.dark .item .iright .iorg { color: #444; }
+body.dark .item .iright .idesc { color: #666; }
+body.dark .item .iright .itag { border-color: #2a2a2a; color: #555; }
+body.dark .item .iright .itag.hi { border-color: #7c3aed; color: #7c3aed; }
+
+body.dark .projects-grid .proj-card { border-color: #1e1e1e; border-left-color: #7c3aed; background: transparent; }
+body.dark .projects-grid .proj-card .ptitle { color: #e8e8e8; }
+body.dark .projects-grid .proj-card .pdesc { color: #555; }
+body.dark .projects-grid .proj-card .ptag { background: #111; color: #555; }
+body.dark .projects-grid .proj-card.featured { border-color: #1e1826; border-left-color: #7c3aed; background: #0d0a14; }
+body.dark .projects-grid .proj-card.featured .ptag { background: #1e1826; color: #a78bfa; }
+
+body.dark .cv-foot { background: #0e0e0e; border-top-color: #1a1a1a; }
+body.dark .cv-foot .fl { color: #333; }
+
+/* ─────────────── PRINT ─────────────── */
+@media print {
+  body { background: #fff; padding: 0; }
+  .toolbar { display: none; }
+  .cv { box-shadow: none; }
+  body.dark .cv { background: #fff; color: #050505; }
+}
+</style>
+</head>
+<body class="light">
+
+<div class="toolbar">
+  <div class="switch" role="tablist">
+    <button id="btn-light" class="active" onclick="setTheme('light')">Claro (Print)</button>
+    <button id="btn-dark" onclick="setTheme('dark')">Dark</button>
+  </div>
+  <button onclick="window.print()">Imprimir / Salvar PDF</button>
+  <button class="alt" onclick="exportPNG('cv', 'curriculo-elto-borges.png')">Exportar PNG</button>
+</div>
+
+<div class="cv" id="cv">
+  <span class="bracket tl"></span>
+  <span class="bracket tr"></span>
+  <span class="bracket bl"></span>
+  <span class="bracket br"></span>
+
+  <!-- HEADER -->
+  <div class="cv-head">
+    <div>
+      <div class="name">ELTO<span class="ac">.</span>BORGES</div>
+    </div>
+    <div class="cv-head-right">
+      <div class="role">Desenvolvedor Full Stack &amp; Fundador da GlicemIA</div>
+      <div class="meta">Piauí, Brasil &nbsp;·&nbsp; IFPI Picos &nbsp;·&nbsp; IBICT &nbsp;·&nbsp; 18 anos</div>
+    </div>
+  </div>
+
+  <!-- BODY SPLIT -->
+  <div class="cv-body">
+
+    <!-- SIDEBAR -->
+    <div class="cv-sidebar">
+
+      <div class="photo-wrap">
+        <img src="assets/foto.png" alt="Elto Borges" />
+      </div>
+
+      <!-- CONTATO -->
+      <div>
+        <div class="side-section-title">Contato</div>
+        <ul class="contact-list">
+          <li><i class="icon">⬡</i> eltobsjr.github.io</li>
+          <li><i class="icon">⌥</i> github.com/eltobsjr</li>
+          <li><i class="icon">in</i> linkedin.com/in/elto-borges-8730b8384</li>
+          <li><i class="icon">∑</i> lattes.cnpq.br/2870235105898473</li>
+          <li><i class="icon">◎</i> Piauí, Brasil 🇧🇷</li>
+        </ul>
+      </div>
+
+      <!-- NÚMEROS -->
+      <div>
+        <div class="side-section-title">Números</div>
+        <div class="side-stat"><span class="sk">Projetos reais</span><span class="sv ac">6+</span></div>
+        <div class="side-stat"><span class="sk">Tecnologias</span><span class="sv">14+</span></div>
+        <div class="side-stat"><span class="sk">Bolsista desde</span><span class="sv ac">2026</span></div>
+        <div class="side-stat"><span class="sk">Experiência</span><span class="sv">3 anos</span></div>
+      </div>
+
+      <!-- STACK -->
+      <div>
+        <div class="side-section-title">Stack</div>
+        <div class="skill-group">
+          <div class="skill-group-label">Backend</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Java</span>
+            <span class="skill-tag">Spring Boot</span>
+            <span class="skill-tag">Node.js</span>
+            <span class="skill-tag">Express</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-label">Frontend</div>
+          <div class="skill-tags">
+            <span class="skill-tag">React</span>
+            <span class="skill-tag">Next.js</span>
+            <span class="skill-tag">TypeScript</span>
+            <span class="skill-tag">Angular</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-label">Mobile</div>
+          <div class="skill-tags">
+            <span class="skill-tag">React Native</span>
+            <span class="skill-tag">Kotlin</span>
+            <span class="skill-tag">Android</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-label">Banco / Infra</div>
+          <div class="skill-tags">
+            <span class="skill-tag">MySQL</span>
+            <span class="skill-tag">Supabase</span>
+            <span class="skill-tag">PostgreSQL</span>
+            <span class="skill-tag">Git</span>
+            <span class="skill-tag">Linux</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="cv-main">
+
+      <!-- SOBRE -->
+      <div>
+        <div class="section-header">
+          <span class="num">01</span>
+          <span class="label">Sobre</span>
+        </div>
+        <p class="summary-text">
+          Desenvolvedor Full Stack, 18 anos. Fundador da <strong>GlicemIA</strong> — plataforma de monitoramento
+          glicêmico com IA. Bolsista no <strong>IBICT</strong> como desenvolvedor fullstack (Java, Spring Boot, Angular).
+          Técnico em Informática pelo IFPI Picos, cursando ADS. Disponível para projetos e colaborações.
+        </p>
+      </div>
+
+      <!-- EXPERIÊNCIA -->
+      <div>
+        <div class="section-header">
+          <span class="num">02</span>
+          <span class="label">Experiência</span>
+        </div>
+        <div class="item">
+          <div class="year">2026<br><span class="now">► atual</span></div>
+          <div class="iright">
+            <div class="ititle">Desenvolvedor Fullstack · Bolsista</div>
+            <div class="iorg">IBICT — Instituto Brasileiro de Informação em Ciência e Tecnologia · Brasília/DF (Remoto)</div>
+            <div class="idesc">Desenvolvimento de plataformas web institucionais. 20h semanais.</div>
+            <div class="itags">
+              <span class="itag hi">Java</span>
+              <span class="itag hi">Spring Boot</span>
+              <span class="itag hi">Angular</span>
+              <span class="itag">JavaScript</span>
+              <span class="itag">Bolsa CNPq</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FORMAÇÃO -->
+      <div>
+        <div class="section-header">
+          <span class="num">03</span>
+          <span class="label">Formação</span>
+        </div>
+        <div class="item">
+          <div class="year">2026<br><span class="now">► atual</span></div>
+          <div class="iright">
+            <div class="ititle">Análise e Desenvolvimento de Sistemas</div>
+            <div class="iorg">IFPI — Campus Picos, PI</div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="year">2023<br>› 2026</div>
+          <div class="iright">
+            <div class="ititle">Técnico em Informática Integrado ao Ensino Médio</div>
+            <div class="iorg">IFPI — Campus Picos, PI</div>
+            <div class="idesc">Formação técnica em TI com base sólida em programação, redes e desenvolvimento.</div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="year">2014<br>› 2022</div>
+          <div class="iright">
+            <div class="ititle">Ensino Fundamental</div>
+            <div class="iorg">Colégio Machado de Assis</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJETOS -->
+      <div>
+        <div class="section-header">
+          <span class="num">04</span>
+          <span class="label">Projetos Selecionados</span>
+        </div>
+        <div class="projects-grid">
+          <div class="proj-card featured">
+            <div class="ptitle">GlicemIA</div>
+            <div class="pdesc">Plataforma de monitoramento glicêmico com IA. Análise de exames PDF, registro por voz e acompanhamento personalizado.</div>
+            <div class="ptags">
+              <span class="ptag">React</span>
+              <span class="ptag">Next.js</span>
+              <span class="ptag">Gemini AI</span>
+              <span class="ptag">Supabase</span>
+              <span class="ptag">TypeScript</span>
+            </div>
+          </div>
+          <div class="proj-card">
+            <div class="ptitle">PEC.AI</div>
+            <div class="pdesc">Automação de Programas de Exercício Compensatório com IA generativa. Geração e gerenciamento de PECs para fisioterapeutas.</div>
+            <div class="ptags">
+              <span class="ptag">Next.js</span>
+              <span class="ptag">Gemini</span>
+              <span class="ptag">TypeScript</span>
+              <span class="ptag">Node.js</span>
+            </div>
+          </div>
+          <div class="proj-card">
+            <div class="ptitle">UGym</div>
+            <div class="pdesc">Sistema completo de gestão de academias com app Android. Controle de alunos, planos, pagamentos e treinos.</div>
+            <div class="ptags">
+              <span class="ptag">Spring Boot</span>
+              <span class="ptag">React</span>
+              <span class="ptag">Kotlin</span>
+              <span class="ptag">MySQL</span>
+            </div>
+          </div>
+          <div class="proj-card">
+            <div class="ptitle">RFSmart / MedicSystem</div>
+            <div class="pdesc">RFSmart: gestão de propriedades rurais. MedicSystem: sistema médico com prontuários e agendamentos.</div>
+            <div class="ptags">
+              <span class="ptag">Spring Boot</span>
+              <span class="ptag">React</span>
+              <span class="ptag">Java</span>
+              <span class="ptag">MySQL</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /cv-main -->
+  </div><!-- /cv-body -->
+
+  <!-- FOOTER -->
+  <div class="cv-foot">
+    <span class="fl">eltobsjr.github.io &nbsp;·&nbsp; github.com/eltobsjr &nbsp;·&nbsp; lattes.cnpq.br/2870235105898473</span>
+    <span class="fc">// disponível p/ projetos</span>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script>
+function setTheme(t) {
+  document.body.classList.toggle("dark", t === "dark");
+  document.body.classList.toggle("light", t === "light");
+  document.getElementById("btn-light").classList.toggle("active", t === "light");
+  document.getElementById("btn-dark").classList.toggle("active", t === "dark");
+}
+
+async function exportPNG(id, filename) {
+  const node = document.getElementById(id);
+  const isDark = document.body.classList.contains("dark");
+  const canvas = await html2canvas(node, {
+    backgroundColor: isDark ? "#080808" : "#ffffff",
+    scale: 3,
+    useCORS: true,
+    logging: false,
+  });
+  canvas.toBlob((blob) => {
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = filename;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  }, "image/png");
+}
+</script>
+</body>
+</html>
