@@ -1,0 +1,3439 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Elto Borges — Desenvolvedor Full Stack</title>
+    <meta
+      name="description"
+      content="Portfólio de Elto Borges (eltobsjr) — Desenvolvedor Full Stack, fundador da GlicemIA, bolsista no IBICT."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+      }
+      :root {
+        --bg: #050505;
+        --bg-1: #0a0a0d;
+        --bg-2: #0f0f14;
+        --line: rgba(255, 255, 255, 0.06);
+        --line-2: rgba(255, 255, 255, 0.1);
+        --ink: #e8e8ea;
+        --ink-dim: #8a8a93;
+        --ink-muted: #5a5a63;
+        --invert-text: #050505;
+        --nav-bg: rgba(5, 5, 5, 0.6);
+        --hero-vignette: radial-gradient(
+          ellipse at center,
+          transparent 30%,
+          rgba(5, 5, 5, 0.85) 80%
+        );
+        --grid-line: rgba(255, 255, 255, 0.025);
+        --accent: #7c3aed;
+        --accent-2: #00d4ff;
+        --accent-3: #00ff9f;
+        --accent-rgb: 124, 58, 237;
+        --accent-2-rgb: 0, 212, 255;
+        --accent-3-rgb: 0, 255, 159;
+        --glitch-intensity: 1;
+        --scanline-opacity: 0.06;
+        --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
+        --font-mono:
+          "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+      }
+      :root[data-theme="light"] {
+        --bg: #f4f4f0;
+        --bg-1: #ffffff;
+        --bg-2: #fafaf7;
+        --line: rgba(5, 5, 5, 0.1);
+        --line-2: rgba(5, 5, 5, 0.18);
+        --ink: #0a0a0a;
+        --ink-dim: #2a2a32;
+        --ink-muted: #4a4a52;
+        --invert-text: #ffffff;
+        --nav-bg: rgba(244, 244, 240, 0.85);
+        --hero-vignette: radial-gradient(
+          ellipse at center,
+          transparent 30%,
+          rgba(244, 244, 240, 0.7) 85%
+        );
+        --grid-line: rgba(5, 5, 5, 0.04);
+      }
+      :root[data-theme="hc"] {
+        --bg: #fff;
+        --bg-1: #fff;
+        --bg-2: #fff;
+        --line: #050505;
+        --line-2: #050505;
+        --ink: #050505;
+        --ink-dim: #0a0a0a;
+        --ink-muted: #1a1a1a;
+        --invert-text: #ffffff;
+        --nav-bg: rgba(255, 255, 255, 0.95);
+        --hero-vignette: none;
+        --scanline-opacity: 0;
+      }
+      :root[data-theme="hc"] .scanlines::before,
+      :root[data-theme="hc"] .scanlines::after,
+      :root[data-theme="hc"] .noise::before {
+        display: none !important;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: var(--bg);
+        color: var(--ink);
+      }
+      body {
+        font-family: var(--font-mono);
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+      ::selection {
+        background: rgba(var(--accent-rgb), 0.4);
+        color: #fff;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      button {
+        font: inherit;
+        color: inherit;
+        background: none;
+        border: 0;
+        padding: 0;
+        cursor: pointer;
+      }
+      .scanlines::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background: repeating-linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, var(--scanline-opacity)) 0,
+          rgba(255, 255, 255, var(--scanline-opacity)) 1px,
+          transparent 1px,
+          transparent 3px
+        );
+        pointer-events: none;
+        z-index: 50;
+        mix-blend-mode: overlay;
+      }
+      .scanlines::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background:
+          radial-gradient(
+            ellipse at 50% 0%,
+            rgba(var(--accent-rgb), 0.08),
+            transparent 50%
+          ),
+          radial-gradient(
+            ellipse at 80% 100%,
+            rgba(var(--accent-2-rgb), 0.05),
+            transparent 60%
+          );
+        pointer-events: none;
+        z-index: 1;
+      }
+      .noise::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.5 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/></svg>");
+        opacity: 0.04;
+        pointer-events: none;
+        z-index: 51;
+        mix-blend-mode: overlay;
+      }
+      .container {
+        width: 100%;
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+      @media (min-width: 640px) {
+        .container {
+          padding: 0 32px;
+        }
+      }
+      @media (min-width: 1024px) {
+        .container {
+          padding: 0 48px;
+        }
+      }
+      .eyebrow {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--ink-dim);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .eyebrow .dot {
+        width: 6px;
+        height: 6px;
+        background: var(--accent);
+        box-shadow: 0 0 12px rgba(var(--accent-rgb), 0.8);
+        border-radius: 999px;
+      }
+      .h-display {
+        font-family: var(--font-display);
+        font-weight: 700;
+        letter-spacing: -0.04em;
+        line-height: 0.95;
+      }
+      .mono-tag {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        color: var(--ink-dim);
+      }
+      .glitch {
+        position: relative;
+        display: inline-block;
+      }
+      .glitch[data-text]::before,
+      .glitch[data-text]::after {
+        content: attr(data-text);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        opacity: calc(var(--glitch-intensity) * 0.85);
+      }
+      .glitch[data-text]::before {
+        color: var(--accent);
+        transform: translate(calc(var(--glitch-intensity) * -2px), 0);
+        mix-blend-mode: screen;
+        animation: glitch-x 3.6s infinite steps(1);
+        clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+      }
+      .glitch[data-text]::after {
+        color: var(--accent-2);
+        transform: translate(calc(var(--glitch-intensity) * 2px), 0);
+        mix-blend-mode: screen;
+        animation: glitch-y 4.2s infinite steps(1);
+        clip-path: polygon(0 66%, 100% 66%, 100% 100%, 0 100%);
+      }
+      @keyframes glitch-x {
+        0%,
+        92%,
+        100% {
+          transform: translate(calc(var(--glitch-intensity) * -2px), 0);
+          clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+        }
+        93% {
+          transform: translate(calc(var(--glitch-intensity) * -6px), 1px);
+          clip-path: polygon(0 10%, 100% 10%, 100% 28%, 0 28%);
+        }
+        95% {
+          transform: translate(calc(var(--glitch-intensity) * 4px), -1px);
+          clip-path: polygon(0 40%, 100% 40%, 100% 55%, 0 55%);
+        }
+        97% {
+          transform: translate(calc(var(--glitch-intensity) * -2px), 0);
+          clip-path: polygon(0 60%, 100% 60%, 100% 75%, 0 75%);
+        }
+      }
+      @keyframes glitch-y {
+        0%,
+        90%,
+        100% {
+          transform: translate(calc(var(--glitch-intensity) * 2px), 0);
+          clip-path: polygon(0 66%, 100% 66%, 100% 100%, 0 100%);
+        }
+        91% {
+          transform: translate(calc(var(--glitch-intensity) * 5px), 1px);
+          clip-path: polygon(0 50%, 100% 50%, 100% 65%, 0 65%);
+        }
+        94% {
+          transform: translate(calc(var(--glitch-intensity) * -3px), -1px);
+          clip-path: polygon(0 80%, 100% 80%, 100% 95%, 0 95%);
+        }
+        96% {
+          transform: translate(calc(var(--glitch-intensity) * 2px), 0);
+          clip-path: polygon(0 70%, 100% 70%, 100% 90%, 0 90%);
+        }
+      }
+      .btn {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 22px;
+        font-family: var(--font-mono);
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--invert-text);
+        background: var(--accent);
+        border: 1px solid var(--accent);
+        cursor: pointer;
+        transition:
+          transform 0.15s ease,
+          box-shadow 0.2s ease;
+        clip-path: polygon(
+          0 0,
+          calc(100% - 10px) 0,
+          100% 10px,
+          100% 100%,
+          10px 100%,
+          0 calc(100% - 10px)
+        );
+      }
+      .btn::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          120deg,
+          transparent 30%,
+          rgba(255, 255, 255, 0.35) 50%,
+          transparent 70%
+        );
+        transform: translateX(-100%);
+        transition: transform 0.7s ease;
+        pointer-events: none;
+      }
+      .btn:hover::after {
+        transform: translateX(100%);
+      }
+      .btn:hover {
+        box-shadow:
+          0 0 0 1px rgba(var(--accent-rgb), 0.6),
+          0 0 24px rgba(var(--accent-rgb), 0.55),
+          0 0 56px rgba(var(--accent-rgb), 0.35);
+      }
+      .btn:active {
+        transform: translateY(1px);
+      }
+      .btn .arrow {
+        display: inline-block;
+        transition: transform 0.2s ease;
+      }
+      .btn:hover .arrow {
+        transform: translateX(3px);
+      }
+      .btn-ghost {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 13px 20px;
+        font-family: var(--font-mono);
+        font-size: 12px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--ink);
+        background: transparent;
+        border: 1px solid var(--line-2);
+        transition: all 0.18s ease;
+      }
+      .btn-ghost:hover {
+        border-color: rgba(var(--accent-rgb), 0.6);
+        background: rgba(var(--accent-rgb), 0.06);
+      }
+      .card {
+        position: relative;
+        padding: 28px;
+        background: linear-gradient(180deg, var(--bg-1), var(--bg-2));
+        border: 1px solid var(--line);
+        transition:
+          border-color 0.2s ease,
+          transform 0.2s ease;
+      }
+      .card:hover {
+        border-color: rgba(var(--accent-rgb), 0.4);
+      }
+      .card::before {
+        content: "";
+        position: absolute;
+        top: -1px;
+        left: -1px;
+        width: 14px;
+        height: 14px;
+        border-top: 1px solid rgba(var(--accent-rgb), 0.6);
+        border-left: 1px solid rgba(var(--accent-rgb), 0.6);
+        transition:
+          width 0.2s ease,
+          height 0.2s ease;
+      }
+      .card::after {
+        content: "";
+        position: absolute;
+        bottom: -1px;
+        right: -1px;
+        width: 14px;
+        height: 14px;
+        border-bottom: 1px solid rgba(var(--accent-rgb), 0.6);
+        border-right: 1px solid rgba(var(--accent-rgb), 0.6);
+        transition:
+          width 0.2s ease,
+          height 0.2s ease;
+      }
+      .card:hover::before,
+      .card:hover::after {
+        width: 22px;
+        height: 22px;
+      }
+      .code {
+        font-family: var(--font-mono);
+        font-size: 13.5px;
+        line-height: 1.7;
+        background: var(--bg-1);
+        border: 1px solid var(--line);
+        padding: 22px 24px 22px 0;
+        overflow-x: auto;
+      }
+      .code .line {
+        display: grid;
+        grid-template-columns: 32px 1fr;
+        gap: 18px;
+        padding: 0 24px;
+        min-height: 1.7em;
+        align-items: baseline;
+      }
+      .code .line > span:last-child {
+        display: block;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+      .code .line .ln {
+        color: var(--ink-muted);
+        user-select: none;
+        text-align: right;
+      }
+      .code .kw {
+        color: var(--accent);
+      }
+      .code .fn {
+        color: var(--accent-2);
+      }
+      .code .str {
+        color: var(--accent-3);
+      }
+      .code .com {
+        color: var(--ink-muted);
+        font-style: italic;
+      }
+      .code .num {
+        color: #ffb86b;
+      }
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 5px 10px;
+        font-family: var(--font-mono);
+        font-size: 11px;
+        letter-spacing: 0.06em;
+        border: 1px solid var(--line-2);
+        color: var(--ink-dim);
+      }
+      .chip .pulse {
+        width: 6px;
+        height: 6px;
+        border-radius: 999px;
+        background: var(--accent-3);
+        box-shadow: 0 0 8px var(--accent-3);
+        animation: pulse 1.6s ease-in-out infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.4;
+          transform: scale(0.8);
+        }
+      }
+      .caret {
+        display: inline-block;
+        width: 0.55em;
+        height: 1em;
+        background: var(--accent-3);
+        vertical-align: -0.12em;
+        margin-left: 4px;
+        animation: blink 1s step-end infinite;
+      }
+      @keyframes blink {
+        50% {
+          opacity: 0;
+        }
+      }
+      .fade-in {
+        opacity: 0;
+        transform: translateY(14px);
+        filter: blur(6px);
+        transition:
+          opacity 0.9s ease,
+          transform 0.9s ease,
+          filter 0.9s ease;
+      }
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+      }
+      .tech-badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 5px 11px;
+        font-family: var(--font-mono);
+        font-size: 11px;
+        border: 1px solid var(--line-2);
+        color: var(--ink-dim);
+        background: var(--bg-1);
+        letter-spacing: 0.06em;
+        transition: all 0.15s ease;
+        cursor: default;
+      }
+      .tech-badge:hover {
+        border-color: rgba(var(--accent-rgb), 0.5);
+        color: var(--ink);
+        background: rgba(var(--accent-rgb), 0.08);
+      }
+      .project-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+        gap: 20px;
+      }
+      .project-card {
+        position: relative;
+        background: linear-gradient(180deg, var(--bg-1), var(--bg-2));
+        border: 1px solid var(--line);
+        transition:
+          border-color 0.2s ease,
+          transform 0.2s ease;
+        overflow: hidden;
+      }
+      .project-card:hover {
+        border-color: rgba(var(--accent-rgb), 0.4);
+        transform: translateY(-2px);
+      }
+      .project-card::before {
+        content: "";
+        position: absolute;
+        top: -1px;
+        left: -1px;
+        width: 14px;
+        height: 14px;
+        border-top: 1px solid rgba(var(--accent-rgb), 0.6);
+        border-left: 1px solid rgba(var(--accent-rgb), 0.6);
+        transition:
+          width 0.2s ease,
+          height 0.2s ease;
+      }
+      .project-card:hover::before {
+        width: 22px;
+        height: 22px;
+      }
+      .contact-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 14px;
+      }
+      .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 18px 22px;
+        border: 1px solid var(--line);
+        background: var(--bg-1);
+        text-decoration: none;
+        transition: all 0.2s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      .contact-item::before {
+        content: "";
+        position: absolute;
+        top: -1px;
+        left: -1px;
+        width: 10px;
+        height: 10px;
+        border-top: 1px solid rgba(var(--accent-rgb), 0.6);
+        border-left: 1px solid rgba(var(--accent-rgb), 0.6);
+        transition:
+          width 0.2s ease,
+          height 0.2s ease;
+      }
+      .contact-item:hover::before {
+        width: 20px;
+        height: 20px;
+      }
+      .contact-item:hover {
+        border-color: rgba(var(--accent-rgb), 0.5);
+        background: rgba(var(--accent-rgb), 0.04);
+        transform: translateX(3px);
+      }
+      .featured-card {
+        position: relative;
+        border: 1px solid var(--line);
+        overflow: hidden;
+        background: linear-gradient(
+          135deg,
+          var(--bg-1) 0%,
+          var(--bg-2) 60%,
+          rgba(var(--accent-rgb), 0.04) 100%
+        );
+      }
+      .featured-glow {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          ellipse at 70% 50%,
+          rgba(var(--accent-rgb), 0.12),
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+      .feat-split {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+      @media (max-width: 900px) {
+        .feat-split {
+          grid-template-columns: 1fr !important;
+        }
+      }
+      .feat-right {
+        border-left: 1px solid var(--line);
+        padding: 40px;
+      }
+      @media (max-width: 900px) {
+        .feat-right {
+          border-left: 0 !important;
+          border-top: 1px solid var(--line) !important;
+        }
+      }
+      .edu-timeline {
+        position: relative;
+        padding-left: 32px;
+      }
+      .nav-links {
+        display: none !important;
+      }
+      .nav-hamburger {
+        display: inline-flex !important;
+      }
+      @media (min-width: 1024px) {
+        .nav-links {
+          display: flex !important;
+        }
+        .nav-hamburger {
+          display: none !important;
+        }
+      }
+      .mobile-menu {
+        position: fixed;
+        inset: 60px 0 0 0;
+        background: var(--bg);
+        border-top: 1px solid var(--line);
+        z-index: 29;
+        padding: 28px 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        overflow-y: auto;
+      }
+      .mobile-menu.open {
+        transform: translateX(0);
+      }
+      .mobile-menu a {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 4px;
+        font-family: var(--font-mono);
+        font-size: 16px;
+        color: var(--ink);
+        border-bottom: 1px solid var(--line);
+      }
+      .mobile-menu a::after {
+        content: "→";
+        color: var(--accent);
+      }
+      .mobile-menu .cta-mobile {
+        margin-top: 22px;
+        background: var(--accent);
+        color: var(--invert-text);
+        padding: 16px;
+        text-align: center;
+        border: 1px solid var(--accent);
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .mobile-menu .cta-mobile::after {
+        content: "";
+      }
+      .hamburger {
+        width: 44px;
+        height: 44px;
+        display: inline-flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        border: 1px solid var(--line-2);
+        cursor: pointer;
+        background: transparent;
+      }
+      .hamburger span {
+        width: 18px;
+        height: 2px;
+        background: var(--ink);
+        transition:
+          transform 0.2s ease,
+          opacity 0.2s ease;
+      }
+      .hamburger.open span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+      }
+      .hamburger.open span:nth-child(2) {
+        opacity: 0;
+      }
+      .hamburger.open span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+      }
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+      .float-anim {
+        animation: float 4s ease-in-out infinite;
+      }
+      .ticker-wrap{overflow:hidden;position:relative;width:100%;padding:18px 0;margin:0 0 56px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg-1)}
+      .ticker-wrap::before,.ticker-wrap::after{content:"";position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none}
+      .ticker-wrap::before{left:0;background:linear-gradient(to right,var(--bg),transparent)}
+      .ticker-wrap::after{right:0;background:linear-gradient(to left,var(--bg),transparent)}
+      .ticker-track{display:flex;width:max-content;animation:ticker 16s linear infinite}
+      .ticker-track:hover{animation-play-state:paused}
+      @keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+      .ticker-item{display:inline-flex;align-items:center;gap:8px;padding:0 22px;font-family:var(--font-mono);font-size:12px;color:var(--ink-dim);white-space:nowrap;border-right:1px solid var(--line-2);transition:color .15s}
+      .ticker-item:hover{color:var(--ink)}
+      .ticker-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0;display:inline-block;box-shadow:0 0 6px rgba(var(--accent-rgb),0.8)}
+      @media (max-width: 767px) {
+        section {
+          padding-top: 72px !important;
+          padding-bottom: 56px !important;
+          padding-left: 0 !important;
+          padding-right: 0 !important;
+        }
+        .hero-stats {
+          grid-template-columns: 1fr 1fr !important;
+        }
+        .hero-stats > div {
+          padding: 16px 0 !important;
+          border-right: none !important;
+          border-bottom: 1px solid var(--line) !important;
+        }
+        .hero-stats > div:nth-child(odd) {
+          border-right: 1px solid var(--line) !important;
+        }
+        .hero-stats > div:nth-last-child(-n + 2) {
+          border-bottom: none !important;
+        }
+        .hero-ctas {
+          flex-direction: column !important;
+          align-items: stretch !important;
+        }
+        .hero-ctas > * {
+          justify-content: center !important;
+          width: 100% !important;
+        }
+        .hero-bottom-bar {
+          display: none !important;
+        }
+        .hero-photo-wrap {
+          display: none !important;
+        }
+        .hero-split {
+          grid-template-columns: 1fr !important;
+        }
+        .project-grid {
+          grid-template-columns: 1fr !important;
+        }
+        .contact-grid {
+          grid-template-columns: 1fr !important;
+        }
+        .card {
+          padding: 20px !important;
+        }
+      }
+      @media (max-width: 480px) {
+        .brand-tag-hide {
+          display: none !important;
+        }
+        .theme-label {
+          display: none !important;
+        }
+      }
+      @media (min-width: 1024px) {
+        .nav-cta-desktop {
+          display: inline-flex !important;
+        }
+      }
+    </style>
+  </head>
+  <body class="scanlines noise">
+    <div id="root"></div>
+
+    <script
+      src="https://unpkg.com/react@18.3.1/umd/react.development.js"
+      integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"
+      integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"
+      integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- BOOT -->
+    <script type="text/babel">
+      const { useEffect: useEffect0, useState: useState0 } = React;
+      function Boot({ onDone }) {
+        const lines = [
+          { t: "[ OK ] kernel: portfolio.v2 — iniciando eltobsjr" },
+          { t: "[ OK ] mounting /dev/ibict/fullstack-dev" },
+          { t: "[ OK ] projetos carregados: GlicemIA, UGym, RFSmart..." },
+          { t: "[ OK ] status: disponível — bem-vindo." },
+        ];
+        const [shown, setShown] = useState0(0);
+        const [progress, setProgress] = useState0(0);
+        useEffect0(() => {
+          let i = 0;
+          const total = 900,
+            start = performance.now();
+          const tick = (now) => {
+            const p = Math.min(1, (now - start) / total);
+            setProgress(p);
+            if (p < 1) requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+          const id = setInterval(() => {
+            i++;
+            setShown(i);
+            if (i >= lines.length) {
+              clearInterval(id);
+              setTimeout(() => onDone && onDone(), 260);
+            }
+          }, 200);
+          return () => clearInterval(id);
+        }, []);
+        const bS = {
+          wrap: {
+            position: "fixed",
+            inset: 0,
+            background: "var(--bg)",
+            zIndex: 100,
+            display: "grid",
+            placeItems: "center",
+            fontFamily: "var(--font-mono)",
+          },
+          inner: { width: "min(560px,90vw)", padding: "24px" },
+          brand: {
+            display: "flex",
+            alignItems: "center",
+            gap: 12,
+            color: "#fff",
+            marginBottom: 28,
+            fontWeight: 500,
+          },
+          console: {
+            fontSize: 12.5,
+            lineHeight: 2,
+            marginBottom: 28,
+            minHeight: 140,
+          },
+          line: { display: "flex", gap: 6 },
+          barLabel: {
+            display: "flex",
+            justifyContent: "space-between",
+            color: "var(--ink-dim)",
+            marginBottom: 8,
+            fontSize: 11,
+            letterSpacing: "0.1em",
+          },
+          barTrack: {
+            height: 2,
+            background: "rgba(255,255,255,0.08)",
+            overflow: "hidden",
+          },
+          barFill: {
+            height: "100%",
+            background: "linear-gradient(90deg,var(--accent),var(--accent-2))",
+            boxShadow: "0 0 14px rgba(var(--accent-rgb),0.8)",
+            transition: "width 60ms linear",
+          },
+        };
+        return (
+          <div style={bS.wrap}>
+            <div style={bS.inner}>
+              <div style={bS.brand}>
+                <span style={{ color: "var(--accent)", fontSize: 18 }}>▍</span>
+                <span style={{ letterSpacing: "0.18em", fontSize: 13 }}>
+                  ELTO::BORGES
+                </span>
+                <span style={{ color: "var(--ink-muted)", fontSize: 11 }}>
+                  v2.0.0
+                </span>
+              </div>
+              <div style={bS.console}>
+                {lines.slice(0, shown).map((l, i) => (
+                  <div key={i} style={bS.line}>
+                    <span style={{ color: "var(--accent-3)" }}>
+                      {l.t.slice(0, 6)}
+                    </span>
+                    <span style={{ color: "var(--ink-dim)" }}>
+                      {l.t.slice(6)}
+                    </span>
+                  </div>
+                ))}
+                {shown < lines.length && (
+                  <div style={bS.line}>
+                    <span style={{ color: "var(--accent)" }}>›</span>
+                    <span style={{ color: "var(--ink-dim)" }}>loading...</span>
+                    <span className="caret" style={{ marginLeft: 2 }} />
+                  </div>
+                )}
+              </div>
+              <div>
+                <div style={bS.barLabel}>
+                  <span>CARREGANDO PORTFÓLIO</span>
+                  <span>
+                    {Math.floor(progress * 100)
+                      .toString()
+                      .padStart(3, "0")}
+                    %
+                  </span>
+                </div>
+                <div style={bS.barTrack}>
+                  <div style={{ ...bS.barFill, width: `${progress * 100}%` }} />
+                </div>
+              </div>
+              <div
+                style={{
+                  marginTop: 20,
+                  fontSize: 10,
+                  color: "var(--ink-muted)",
+                  letterSpacing: "0.1em",
+                }}
+              >
+                IFPI CAMPUS PICOS · IBICT · 2026
+              </div>
+            </div>
+          </div>
+        );
+      }
+      window.Boot = Boot;
+    </script>
+
+    <!-- HERO -->
+    <script type="text/babel">
+      const {
+        useEffect: useEffect1,
+        useRef: useRef1,
+        useState: useState1,
+      } = React;
+
+      function MatrixRain({ enabled = true }) {
+        const canvasRef = useRef1(null),
+          rafRef = useRef1(0);
+        useEffect1(() => {
+          if (!enabled) return;
+          const canvas = canvasRef.current;
+          if (!canvas) return;
+          const ctx = canvas.getContext("2d");
+          let w = 0,
+            h = 0,
+            cols = 0,
+            drops = [];
+          const fontSize = 14,
+            chars = "01アカサタナハマヤラワABCDEF{}<>/$_=*•JAVA".split("");
+          const resize = () => {
+            const dpr = Math.min(2, window.devicePixelRatio || 1);
+            w = canvas.clientWidth;
+            h = canvas.clientHeight;
+            canvas.width = w * dpr;
+            canvas.height = h * dpr;
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            cols = Math.ceil(w / fontSize);
+            drops = new Array(cols).fill(0).map(() => Math.random() * -h);
+          };
+          resize();
+          const ro = new ResizeObserver(resize);
+          ro.observe(canvas);
+          let last = 0;
+          const draw = (t) => {
+            rafRef.current = requestAnimationFrame(draw);
+            if (t - last < 55) return;
+            last = t;
+            ctx.fillStyle = "rgba(5,5,5,0.08)";
+            ctx.fillRect(0, 0, w, h);
+            ctx.font = `${fontSize}px JetBrains Mono,monospace`;
+            for (let i = 0; i < cols; i++) {
+              const x = i * fontSize,
+                y = drops[i],
+                ch = chars[(Math.random() * chars.length) | 0];
+              ctx.fillStyle = "rgba(0,255,159,0.9)";
+              ctx.fillText(ch, x, y);
+              ctx.fillStyle = "rgba(124,58,237,0.35)";
+              ctx.fillText(ch, x, y - fontSize);
+              if (y > h && Math.random() > 0.975) drops[i] = -fontSize;
+              else drops[i] += fontSize;
+            }
+          };
+          rafRef.current = requestAnimationFrame(draw);
+          return () => {
+            cancelAnimationFrame(rafRef.current);
+            ro.disconnect();
+          };
+        }, [enabled]);
+        return (
+          <canvas
+            ref={canvasRef}
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              opacity: enabled ? 0.45 : 0,
+              transition: "opacity 0.6s ease",
+            }}
+          />
+        );
+      }
+
+      function Nav({ theme, onThemeChange }) {
+        const [open, setOpen] = useState1(false);
+        const cycle = () => {
+          const o = ["dark", "light", "hc"];
+          onThemeChange && onThemeChange(o[(o.indexOf(theme) + 1) % o.length]);
+        };
+        const labels = { dark: "DARK", light: "LIGHT", hc: "HC" };
+        const icons = {
+          dark: (
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+          ),
+          light: (
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+            </svg>
+          ),
+          hc: (
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <circle cx="12" cy="12" r="9" />
+              <path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor" />
+            </svg>
+          ),
+        };
+        const nS = {
+          nav: {
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            zIndex: 30,
+            backdropFilter: "blur(10px)",
+            background: "var(--nav-bg)",
+            borderBottom: "1px solid var(--line)",
+          },
+          inner: {
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            height: 60,
+          },
+          brand: {
+            display: "flex",
+            alignItems: "center",
+            gap: 10,
+            fontFamily: "var(--font-mono)",
+            fontSize: 13,
+          },
+          links: {
+            display: "flex",
+            gap: 28,
+            fontFamily: "var(--font-mono)",
+            fontSize: 12,
+            color: "var(--ink-dim)",
+          },
+          themeBtn: {
+            display: "inline-flex",
+            alignItems: "center",
+            gap: 8,
+            padding: "8px 12px",
+            fontFamily: "var(--font-mono)",
+            fontWeight: 500,
+            color: "var(--ink-dim)",
+            border: "1px solid var(--line-2)",
+            cursor: "pointer",
+            background: "transparent",
+          },
+        };
+        const close = () => setOpen(false);
+        return (
+          <>
+            <nav style={nS.nav}>
+              <div className="container" style={nS.inner}>
+                <a href="#" style={nS.brand}>
+                  <span
+                    style={{
+                      color: "var(--accent)",
+                      textShadow: "0 0 10px rgba(var(--accent-rgb),0.8)",
+                    }}
+                  >
+                    ▍
+                  </span>
+                  <span style={{ fontWeight: 600, letterSpacing: "0.06em" }}>
+                    ELTO::DEV
+                  </span>
+                  <span
+                    className="brand-tag-hide"
+                    style={{
+                      fontSize: 10,
+                      color: "var(--ink-muted)",
+                      border: "1px solid var(--line-2)",
+                      padding: "2px 6px",
+                      marginLeft: 4,
+                    }}
+                  >
+                    v2
+                  </span>
+                </a>
+                <div className="nav-links" style={nS.links}>
+                  {[
+                    "#sobre",
+                    "#formacao",
+                    "#projetos",
+                    "#arsenal",
+                    "#contato",
+                  ].map((h, i) => (
+                    <a
+                      key={h}
+                      href={h}
+                      style={{ transition: "color 0.15s", padding: "6px 0" }}
+                    >
+                      {
+                        [
+                          "./sobre",
+                          "./formação",
+                          "./projetos",
+                          "./arsenal",
+                          "./contato",
+                        ][i]
+                      }
+                    </a>
+                  ))}
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                  <button onClick={cycle} style={nS.themeBtn}>
+                    {icons[theme]}
+                    <span
+                      className="theme-label"
+                      style={{ fontSize: 10, letterSpacing: "0.14em" }}
+                    >
+                      {labels[theme]}
+                    </span>
+                  </button>
+                  <a
+                    className="nav-cta-desktop"
+                    href="https://github.com/eltobsjr"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      padding: "10px 16px",
+                      fontSize: 11,
+                      display: "none",
+                      alignItems: "center",
+                      gap: 8,
+                      background: "var(--accent)",
+                      color: "var(--invert-text)",
+                      fontFamily: "var(--font-mono)",
+                      fontWeight: 500,
+                      letterSpacing: "0.04em",
+                      textTransform: "uppercase",
+                      border: "1px solid var(--accent)",
+                    }}
+                  >
+                    GitHub <span>→</span>
+                  </a>
+                  <button
+                    className="nav-hamburger hamburger"
+                    aria-label="Menu"
+                    onClick={() => setOpen((o) => !o)}
+                    style={{ display: "none" }}
+                  >
+                    <span />
+                    <span />
+                    <span />
+                  </button>
+                </div>
+              </div>
+            </nav>
+            <div
+              className={`mobile-menu${open ? " open" : ""}`}
+              aria-hidden={!open}
+            >
+              {["#sobre", "#formacao", "#projetos", "#arsenal", "#contato"].map(
+                (h, i) => (
+                  <a key={h} href={h} onClick={close}>
+                    {
+                      [
+                        "./sobre",
+                        "./formação",
+                        "./projetos",
+                        "./arsenal",
+                        "./contato",
+                      ][i]
+                    }
+                  </a>
+                ),
+              )}
+              <a
+                className="cta-mobile"
+                href="https://github.com/eltobsjr"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={close}
+              >
+                github/eltobsjr →
+              </a>
+            </div>
+          </>
+        );
+      }
+
+      function Hero({ matrix, theme, onThemeChange }) {
+        const stats = [
+          { v: "18", l: "anos de idade" },
+          { v: "6+", l: "projetos reais" },
+          { v: "14+", l: "tecnologias" },
+          { v: "2026", l: "IBICT · bolsista" },
+        ];
+        const hS = {
+          section: {
+            position: "relative",
+            minHeight: "100vh",
+            overflow: "hidden",
+            paddingTop: 60,
+            paddingBottom: 60,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+          },
+          bgWrap: { position: "absolute", inset: 0, pointerEvents: "none" },
+          vignette: {
+            position: "absolute",
+            inset: 0,
+            background: "var(--hero-vignette)",
+          },
+          grid: {
+            position: "absolute",
+            inset: 0,
+            backgroundImage:
+              "linear-gradient(var(--grid-line) 1px,transparent 1px),linear-gradient(90deg,var(--grid-line) 1px,transparent 1px)",
+            backgroundSize: "48px 48px",
+            maskImage:
+              "radial-gradient(ellipse at center,black 40%,transparent 75%)",
+          },
+          content: {
+            position: "relative",
+            zIndex: 2,
+            paddingTop: 80,
+            paddingBottom: 60,
+          },
+          title: {
+            margin: 0,
+            fontSize: "clamp(72px,14vw,200px)",
+            fontFamily: "var(--font-display)",
+            fontWeight: 700,
+            letterSpacing: "-0.06em",
+            lineHeight: 0.85,
+            display: "flex",
+            flexDirection: "column",
+            gap: 4,
+          },
+          sep: {
+            display: "flex",
+            alignItems: "center",
+            gap: 18,
+            fontFamily: "var(--font-mono)",
+            fontSize: "clamp(11px,1.2vw,13px)",
+            fontWeight: 400,
+            letterSpacing: "0.4em",
+            color: "var(--ink-muted)",
+            margin: "10px 0",
+          },
+          sepBar: {
+            flex: 1,
+            height: 1,
+            background:
+              "linear-gradient(90deg,transparent,var(--line-2),transparent)",
+            maxWidth: 180,
+          },
+          subtitle: {
+            fontFamily: "var(--font-display)",
+            fontSize: "clamp(18px,2.2vw,28px)",
+            fontWeight: 400,
+            color: "var(--ink)",
+            margin: "32px 0 14px",
+          },
+          lede: {
+            fontFamily: "var(--font-mono)",
+            fontSize: 14,
+            lineHeight: 1.8,
+            color: "var(--ink-dim)",
+            margin: "0 0 40px",
+            maxWidth: 500,
+          },
+          ctas: {
+            display: "flex",
+            gap: 14,
+            flexWrap: "wrap",
+            marginBottom: 80,
+          },
+          statsGrid: {
+            display: "grid",
+            gridTemplateColumns: "repeat(4,1fr)",
+            borderTop: "1px solid var(--line)",
+            borderBottom: "1px solid var(--line)",
+            maxWidth: 640,
+          },
+          stat: { padding: "24px 0", textAlign: "center" },
+          statV: {
+            fontFamily: "var(--font-display)",
+            fontSize: "clamp(24px,3vw,40px)",
+            fontWeight: 700,
+            letterSpacing: "-0.04em",
+            color: "var(--ink)",
+          },
+          statL: {
+            fontFamily: "var(--font-mono)",
+            fontSize: 10,
+            letterSpacing: "0.08em",
+            color: "var(--ink-dim)",
+            marginTop: 4,
+            textTransform: "uppercase",
+          },
+          bottomBar: {
+            position: "absolute",
+            bottom: 28,
+            left: 0,
+            right: 0,
+            zIndex: 2,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: "0 48px",
+          },
+        };
+        return (
+          <section id="hero" style={hS.section}>
+            <Nav theme={theme} onThemeChange={onThemeChange} />
+            <div style={hS.bgWrap}>
+              <MatrixRain enabled={matrix} />
+              <div style={hS.vignette} />
+              <div style={hS.grid} />
+            </div>
+            <div className="container" style={hS.content}>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr auto", gap: 40, alignItems: "center" }} className="hero-split">
+              <div>
+              <div className="fade-in visible">
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 14,
+                    marginBottom: 36,
+                    flexWrap: "wrap",
+                  }}
+                >
+                  <span className="chip">
+                    <span className="pulse" />
+                    DISPONÍVEL P/ PROJETOS
+                  </span>
+                  <span className="mono-tag">IFPI PICOS · IBICT · 2026</span>
+                </div>
+              </div>
+              <h1 style={hS.title}>
+                <span
+                  className="glitch h-display"
+                  data-text="ELTO"
+                  style={{ color: "var(--ink)" }}
+                >
+                  ELTO
+                </span>
+                <span style={hS.sep}>
+                  <span style={hS.sepBar} />
+                  <span style={{ padding: "0 4px" }}>BORGES</span>
+                  <span style={hS.sepBar} />
+                </span>
+                <span
+                  className="glitch h-display"
+                  data-text="DEV"
+                  style={{ color: "var(--accent)" }}
+                >
+                  DEV
+                </span>
+              </h1>
+              <p style={hS.subtitle}>
+                Desenvolvedor Full Stack &amp; Fundador da{" "}
+                <span style={{ color: "var(--accent)" }}>GlicemIA</span>
+              </p>
+              <p style={hS.lede}>
+                Construindo soluções reais com IA, dados e código.
+                <br />
+                Java · Spring Boot · React · Next.js · IA/Gemini · IFPI Picos →
+                IBICT.
+                <br />
+                Transformando tecnologia em impacto real.
+              </p>
+              <div style={hS.ctas} className="hero-ctas">
+                <a href="#projetos" className="btn">
+                  Ver Projetos<span className="arrow">→</span>
+                </a>
+                <a href="#contato" className="btn-ghost">
+                  <span style={{ color: "var(--accent-3)" }}>$</span>./contato
+                </a>
+                <a
+                  href="https://github.com/eltobsjr"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-ghost"
+                >
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path d="M12 0C5.37 0 0 5.373 0 12c0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.729.083-.729 1.205.084 1.84 1.237 1.84 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23a11.52 11.52 0 0 1 3-.405c1.02.005 2.045.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.604-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.298 24 12c0-6.627-5.373-12-12-12z" />
+                  </svg>
+                  eltobsjr
+                </a>
+              </div>
+              <div style={hS.statsGrid} className="hero-stats">
+                {stats.map((s, i) => (
+                  <div
+                    key={i}
+                    style={{
+                      ...hS.stat,
+                      borderRight:
+                        i < stats.length - 1 ? "1px solid var(--line)" : "none",
+                    }}
+                  >
+                    <div style={hS.statV}>{s.v}</div>
+                    <div style={hS.statL}>{s.l}</div>
+                  </div>
+                ))}
+              </div>
+              </div>{/* end left col */}
+              <div className="hero-photo-wrap" style={{ position: "relative", flexShrink: 0 }}>
+                <div style={{
+                  position: "absolute", inset: -2,
+                  background: "linear-gradient(135deg, var(--accent), var(--accent-2), var(--accent-3))",
+                  clipPath: "polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px))",
+                  opacity: 0.7,
+                }} />
+                <img
+                  src="assets/foto.png"
+                  alt="Elto Borges"
+                  style={{
+                    width: "clamp(240px, 28vw, 380px)",
+                    height: "clamp(240px, 28vw, 380px)",
+                    objectFit: "cover",
+                    objectPosition: "top center",
+                    display: "block",
+                    position: "relative",
+                    clipPath: "polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px))",
+                    filter: "grayscale(20%) contrast(1.05)",
+                  }}
+                />
+                <div style={{
+                  position: "absolute", bottom: 12, left: -12,
+                  fontFamily: "var(--font-mono)", fontSize: 10,
+                  color: "var(--accent-3)", letterSpacing: "0.12em",
+                  background: "var(--bg)", padding: "4px 8px",
+                  border: "1px solid var(--line-2)",
+                }}>eltobsjr.dev</div>
+              </div>
+              </div>{/* end hero-split */}
+            </div>
+            <div style={hS.bottomBar} className="hero-bottom-bar">
+              <span className="mono-tag">SCROLL ↓</span>
+              <span className="mono-tag" style={{ color: "var(--ink-muted)" }}>
+                dev.status:{" "}
+                <span style={{ color: "var(--accent-3)" }}>online</span>
+              </span>
+            </div>
+          </section>
+        );
+      }
+      window.Hero = Hero;
+    </script>
+
+    <!-- SECTIONS -->
+    <script type="text/babel">
+      const {
+        useState: useState2,
+        useEffect: useEffect2,
+        useRef: useRef2,
+      } = React;
+
+      /* ── 01 / SOBRE ── */
+      function AboutTerminal() {
+        const sequence = [
+          { type: "cmd", text: "cat ./eltobsjr.md" },
+          { type: "out", text: "" },
+          { type: "h", text: "# Elto Borges — Desenvolvedor Full Stack" },
+          { type: "out", text: "" },
+          {
+            type: "p",
+            text: "18 anos. IFPI Campus Picos, PI. Desenvolvedor full-stack",
+          },
+          {
+            type: "p",
+            text: "apaixonado por Desenvolvimento de aplicaçoes, Inteligência Artificial, automação e",
+          },
+          {
+            type: "p",
+            text: "soluções que causam impacto real na vida das pessoas.",
+          },
+          { type: "out", text: "" },
+          {
+            type: "p",
+            text: "Fundador da GlicemIA — plataforma de IA para controle",
+          },
+          {
+            type: "p",
+            text: "glicêmico. Atualmente bolsista no IBICT, construindo",
+          },
+          {
+            type: "p",
+            text: "plataformas web com Java, Spring Boot e Angular.",
+          },
+          { type: "out", text: "" },
+          {
+            type: "li",
+            text: "→ IFPI Picos: Técnico em Informática (2023–2026)",
+          },
+          {
+            type: "li",
+            text: "→ IBICT: Desenvolvedor Fullstack · bolsista 2026",
+          },
+          { type: "li", text: "→ Lattes: lattes.cnpq.br/2870235105898473" },
+          { type: "out", text: "" },
+          { type: "cmd", text: "./run --mode=portfolio" },
+        ];
+        const [step, setStep] = useState2(-1),
+          [charIdx, setCharIdx] = useState2(0),
+          [done, setDone] = useState2(false);
+        const ref = useRef2(null);
+        useEffect2(() => {
+          const el = ref.current;
+          if (!el) return;
+          let started = false;
+          const io = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((e) => {
+                if (e.isIntersecting && !started) {
+                  started = true;
+                  setStep(0);
+                  setCharIdx(0);
+                  setDone(false);
+                }
+              });
+            },
+            { threshold: 0.3 },
+          );
+          io.observe(el);
+          return () => io.disconnect();
+        }, []);
+        useEffect2(() => {
+          if (step < 0 || done) return;
+          if (step >= sequence.length) {
+            setDone(true);
+            return;
+          }
+          const cur = sequence[step],
+            target = cur.text || "";
+          if (cur.type === "out" || charIdx >= target.length) {
+            const delay =
+              cur.type === "cmd"
+                ? 320
+                : cur.type === "h"
+                  ? 180
+                  : cur.type === "li"
+                    ? 60
+                    : 80;
+            const t = setTimeout(() => {
+              setStep((s) => s + 1);
+              setCharIdx(0);
+            }, delay);
+            return () => clearTimeout(t);
+          }
+          const speed = cur.type === "cmd" ? 28 : 14;
+          const t = setTimeout(() => setCharIdx((c) => c + 1), speed);
+          return () => clearTimeout(t);
+        }, [step, charIdx, done]);
+
+        const renderLine = (item, i, fullText) => {
+          const text = fullText ?? item.text;
+          if (item.type === "cmd")
+            return (
+              <div
+                key={i}
+                style={{ display: "flex", gap: 4, flexWrap: "wrap" }}
+              >
+                <span style={{ color: "var(--accent-3)" }}>eltobsjr</span>
+                <span style={{ color: "var(--ink-muted)" }}>:</span>
+                <span style={{ color: "var(--accent-2)" }}>~/dev</span>
+                <span style={{ color: "var(--ink-muted)", marginRight: 8 }}>
+                  $
+                </span>
+                <span style={{ color: "var(--ink)" }}>{text}</span>
+              </div>
+            );
+          if (item.type === "h")
+            return (
+              <div
+                key={i}
+                style={{
+                  display: "flex",
+                  gap: 4,
+                  color: "var(--accent)",
+                  fontWeight: 500,
+                }}
+              >
+                {text}
+              </div>
+            );
+          if (item.type === "li")
+            return (
+              <div
+                key={i}
+                style={{ display: "flex", gap: 4, color: "var(--accent-3)" }}
+              >
+                {text}
+              </div>
+            );
+          if (item.type === "out") return <div key={i}>&nbsp;</div>;
+          return (
+            <div
+              key={i}
+              style={{ display: "flex", gap: 4, color: "var(--ink-dim)" }}
+            >
+              {text}
+            </div>
+          );
+        };
+
+        const tS = {
+          section: {
+            position: "relative",
+            padding: "140px 0 120px",
+            borderTop: "1px solid var(--line)",
+          },
+          title: {
+            fontFamily: "var(--font-display)",
+            fontSize: "clamp(36px,5vw,64px)",
+            fontWeight: 600,
+            letterSpacing: "-0.04em",
+            lineHeight: 1.05,
+            margin: 0,
+            color: "var(--ink)",
+          },
+          frame: {
+            border: "1px solid var(--line-2)",
+            background: "var(--bg-1)",
+            marginBottom: 40,
+          },
+          frameBar: {
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: "10px 16px",
+            borderBottom: "1px solid var(--line)",
+            background: "linear-gradient(180deg,var(--bg-2),var(--bg-1))",
+          },
+        };
+        return (
+          <section id="sobre" style={tS.section} ref={ref}>
+            <div className="container">
+              <div
+                style={{
+                  marginBottom: 56,
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 18,
+                }}
+              >
+                <span className="eyebrow">
+                  <span className="dot" />
+                  01 / SOBRE
+                </span>
+                <h2 style={tS.title}>
+                  Quem sou eu
+                  <br />
+                  <span style={{ color: "var(--ink-muted)" }}>
+                    // eltobsjr.md
+                  </span>
+                </h2>
+              </div>
+              <div style={tS.frame}>
+                <div style={tS.frameBar}>
+                  <div style={{ display: "flex", gap: 6 }}>
+                    {["#ff5f56", "#ffbd2e", "#27c93f"].map((c) => (
+                      <span
+                        key={c}
+                        style={{
+                          width: 10,
+                          height: 10,
+                          borderRadius: "50%",
+                          background: c,
+                        }}
+                      />
+                    ))}
+                  </div>
+                  <div
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      fontSize: 11,
+                      color: "var(--ink-muted)",
+                    }}
+                  >
+                    eltobsjr — bash — 96×24
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      gap: 6,
+                      alignItems: "center",
+                      fontFamily: "var(--font-mono)",
+                      fontSize: 10,
+                      color: "var(--ink-muted)",
+                    }}
+                  >
+                    <span style={{ color: "var(--accent-3)" }}>●</span>connected
+                  </div>
+                </div>
+                <div
+                  style={{
+                    padding: "20px 24px",
+                    fontFamily: "var(--font-mono)",
+                    fontSize: 13,
+                    lineHeight: 1.9,
+                    minHeight: 340,
+                  }}
+                >
+                  {step >= 0 &&
+                    sequence.slice(0, step).map((it, i) => renderLine(it, i))}
+                  {step >= 0 &&
+                    step < sequence.length &&
+                    renderLine(
+                      sequence[step],
+                      "cur",
+                      sequence[step].text.slice(0, charIdx),
+                    )}
+                  {step >= 0 && !done && <span className="caret" />}
+                </div>
+              </div>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(auto-fill,minmax(260px,1fr))",
+                  gap: 16,
+                }}
+              >
+                {[
+                  {
+                    n: "01",
+                    l: "IBICT",
+                    t: "Bolsista no IBICT como desenvolvedor fullstack (Java, Spring Boot e Angular). 20h semanais.",
+                  },
+                  {
+                    n: "02",
+                    l: "IA",
+                    t: "Apaixonado por Inteligência Artificial aplicada a problemas reais: saúde, educação e tecnologia.",
+                  },
+                  {
+                    n: "03",
+                    l: "IFPI",
+                    t: "Formado no Técnico em Informática Integrado ao Ensino Médio no IFPI Campus Picos. Cursando ADS.",
+                  },
+                  {
+                    n: "04",
+                    l: "OPEN",
+                    t: "Aberto a freelas, colaborações e projetos inovadores. Código limpo, entrega real.",
+                  },
+                ].map((c) => (
+                  <div
+                    key={c.n}
+                    className="card"
+                    style={{ padding: "22px 24px" }}
+                  >
+                    <div
+                      style={{ display: "flex", gap: 12, alignItems: "center" }}
+                    >
+                      <span
+                        style={{
+                          color: "var(--ink-muted)",
+                          fontFamily: "var(--font-mono)",
+                          fontSize: 12,
+                        }}
+                      >
+                        {c.n}
+                      </span>
+                      <span
+                        style={{
+                          color: "var(--accent)",
+                          fontFamily: "var(--font-mono)",
+                          fontSize: 12,
+                        }}
+                      >
+                        // {c.l}
+                      </span>
+                    </div>
+                    <div
+                      style={{
+                        fontFamily: "var(--font-mono)",
+                        fontSize: 13,
+                        lineHeight: 1.7,
+                        color: "var(--ink-dim)",
+                        marginTop: 10,
+                      }}
+                    >
+                      {c.t}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        );
+      }
+
+      /* ── 02 / FORMAÇÃO ── */
+      function Education() {
+        const items = [
+          {
+            n: "01",
+            year: "2026 → atual",
+            title: "Desenvolvedor Fullstack · Bolsista",
+            org: "IBICT — Instituto Brasileiro de Informação em Ciência e Tecnologia",
+            desc: "Desenvolvimento de plataformas web com Java, Spring Boot, Angular e JavaScript. 20h semanais.",
+            cmd: "git push ibict/main",
+            highlight: true,
+          },
+          {
+            n: "02",
+            year: "2026 → atual",
+            title: "Graduação em Análise e Desenvolvimento de Sistemas",
+            org: "IFPI — Campus Picos",
+            desc: "Formação superior em ADS, complementando a base técnica do ensino médio integrado.",
+            cmd: "study --course=ADS",
+          },
+          {
+            n: "03",
+            year: "2023 → 2026",
+            title: "Técnico em Informática Integrado ao Ensino Médio",
+            org: "IFPI — Campus Picos, PI",
+            desc: "Formação técnica em TI integrada ao ensino médio. Base sólida em programação, redes e desenvolvimento.",
+            cmd: "diploma.sign() // IFPI",
+          },
+          {
+            n: "04",
+            year: "2014 → 2022",
+            title: "Ensino Fundamental",
+            org: "Colégio Machado de Assis",
+            desc: "Formação básica. Primeiros contatos com tecnologia e computação.",
+            cmd: "Hello, World!",
+          },
+        ];
+        const [active, setActive] = useState2(0);
+        const refs = useRef2([]);
+        useEffect2(() => {
+          const io = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((e) => {
+                if (e.isIntersecting) {
+                  const i = Number(e.target.dataset.idx);
+                  setActive((a) => Math.max(a, i));
+                }
+              });
+            },
+            { threshold: 0.4 },
+          );
+          refs.current.forEach((r) => r && io.observe(r));
+          return () => io.disconnect();
+        }, []);
+        const eS = {
+          section: { padding: "140px 0", borderTop: "1px solid var(--line)" },
+          title: {
+            fontFamily: "var(--font-display)",
+            fontSize: "clamp(36px,5vw,64px)",
+            fontWeight: 600,
+            letterSpacing: "-0.04em",
+            lineHeight: 1.05,
+            margin: 0,
+            color: "var(--ink)",
+          },
+          line: {
+            position: "absolute",
+            top: 8,
+            bottom: 8,
+            left: 8,
+            width: 1,
+            background: "var(--line-2)",
+            overflow: "hidden",
+          },
+          lineFill: {
+            width: "100%",
+            background:
+              "linear-gradient(to bottom,var(--accent),var(--accent-2))",
+            boxShadow: "0 0 12px rgba(var(--accent-rgb),0.6)",
+            transition: "height 0.6s ease",
+          },
+          row: {
+            position: "relative",
+            display: "grid",
+            gridTemplateColumns: "auto 1fr",
+            gap: 28,
+            paddingBottom: 60,
+          },
+        };
+        return (
+          <section id="formacao" style={eS.section}>
+            <div className="container">
+              <div
+                style={{
+                  marginBottom: 70,
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 18,
+                }}
+              >
+                <span className="eyebrow">
+                  <span className="dot" />
+                  02 / FORMAÇÃO &amp; EXPERIÊNCIA
+                </span>
+                <h2 style={eS.title}>
+                  Minha jornada
+                  <br />
+                  <span style={{ color: "var(--ink-muted)" }}>
+                    // do ensino médio ao IBICT
+                  </span>
+                </h2>
+              </div>
+              <div
+                className="edu-timeline"
+                style={{ position: "relative", paddingLeft: 32 }}
+              >
+                <div style={eS.line}>
+                  <div
+                    style={{
+                      ...eS.lineFill,
+                      height: `${(active / (items.length - 1)) * 100}%`,
+                    }}
+                  />
+                </div>
+                {items.map((item, i) => (
+                  <div
+                    key={i}
+                    ref={(el) => (refs.current[i] = el)}
+                    data-idx={i}
+                    style={eS.row}
+                  >
+                    <div
+                      style={{
+                        position: "relative",
+                        width: 17,
+                        marginLeft: -32,
+                      }}
+                    >
+                      <div
+                        style={{
+                          width: 17,
+                          height: 17,
+                          borderRadius: 999,
+                          transition: "all 0.4s ease",
+                          background:
+                            i <= active ? "var(--accent)" : "var(--bg)",
+                          boxShadow:
+                            i <= active
+                              ? "0 0 18px rgba(var(--accent-rgb),0.8)"
+                              : "none",
+                          border: item.highlight
+                            ? "1px solid var(--accent-2)"
+                            : "1px solid var(--accent)",
+                        }}
+                      />
+                    </div>
+                    <div>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 12,
+                          marginBottom: 8,
+                          flexWrap: "wrap",
+                        }}
+                      >
+                        <span
+                          style={{
+                            fontFamily: "var(--font-mono)",
+                            fontSize: 11,
+                            color: "var(--ink-muted)",
+                          }}
+                        >
+                          {item.n}
+                        </span>
+                        <span
+                          style={{
+                            fontFamily: "var(--font-mono)",
+                            fontSize: 11,
+                            color: item.highlight
+                              ? "var(--accent-2)"
+                              : "var(--ink-dim)",
+                          }}
+                        >
+                          {item.year}
+                        </span>
+                        {item.highlight && (
+                          <span
+                            style={{
+                              fontFamily: "var(--font-mono)",
+                              fontSize: 9,
+                              letterSpacing: "0.1em",
+                              padding: "2px 8px",
+                              background: "rgba(var(--accent-2-rgb),0.12)",
+                              border: "1px solid rgba(var(--accent-2-rgb),0.4)",
+                              color: "var(--accent-2)",
+                            }}
+                          >
+                            ATUAL
+                          </span>
+                        )}
+                      </div>
+                      <h3
+                        style={{
+                          fontFamily: "var(--font-display)",
+                          fontSize: "clamp(20px,2.2vw,30px)",
+                          fontWeight: 600,
+                          letterSpacing: "-0.02em",
+                          margin: "0 0 6px",
+                          color: "var(--ink)",
+                        }}
+                      >
+                        {item.title}
+                      </h3>
+                      <div
+                        style={{
+                          fontFamily: "var(--font-mono)",
+                          fontSize: 12,
+                          color: "var(--accent)",
+                          marginBottom: 12,
+                        }}
+                      >
+                        {item.org}
+                      </div>
+                      <p
+                        style={{
+                          fontFamily: "var(--font-mono)",
+                          fontSize: 13.5,
+                          lineHeight: 1.7,
+                          color: "var(--ink-dim)",
+                          margin: "0 0 14px",
+                          maxWidth: 580,
+                        }}
+                      >
+                        {item.desc}
+                      </p>
+                      <code
+                        style={{
+                          fontFamily: "var(--font-mono)",
+                          fontSize: 12,
+                          color: "var(--ink)",
+                          background: "var(--bg-1)",
+                          border: "1px solid var(--line)",
+                          padding: "8px 12px",
+                          display: "inline-block",
+                        }}
+                      >
+                        <span style={{ color: "var(--accent-3)" }}>›</span>{" "}
+                        {item.cmd}
+                      </code>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        );
+      }
+
+      /* ── 03 / PROJETOS ── */
+      function Projects() {
+        const others = [
+          {
+            n: "02",
+            name: "PEC.AI",
+            tag: "IA · Comunicação Alternativa",
+            desc: "Plataforma inteligente de Comunicação Alternativa e Aumentativa com IA. Para incluir pessoas com dificuldades de comunicação.",
+            tech: ["IA", "React", "TypeScript"],
+            year: "2025",
+          },
+          {
+            n: "03",
+            name: "UGym Fitness App",
+            tag: "Full Stack · Fitness",
+            desc: "Plataforma completa para Alunos, Personal Trainers e Academias. Auth JWT, hash de senha, políticas de segurança.",
+            tech: ["React", "TypeScript", "Prisma", "Express", "JWT"],
+            year: "2024",
+          },
+          {
+            n: "04",
+            name: "RFSmart Platform",
+            tag: "Full Stack · E-Learning",
+            desc: "Plataforma de cursos online com frontend React/Vite e backend Node.js/Prisma. Framer Motion animations.",
+            tech: ["React", "Vite", "Node.js", "Prisma", "JWT"],
+            year: "2024",
+          },
+          {
+            n: "05",
+            name: "MedicSystem",
+            tag: "Full Stack · Saúde · Cirurgia",
+            desc: "Sistema completo de gestão cirúrgica. Gerencia processos cirúrgicos, documentação médica, autorizações junto a convênios e agendamentos. Dashboard com métricas, exportação PDF/Excel.",
+            tech: ["React 19", "TypeScript", "Vite", "Axios", "Supabase", "jsPDF", "xlsx"],
+            year: "2025",
+          },
+          {
+            n: "06",
+            name: "Sistema Digestivo Interativo",
+            tag: "Educativo · 3D",
+            desc: "Projeto educativo com quiz interativo e esquema 3D do sistema digestivo. Feito com Next.js para o IFPI.",
+            tech: ["Next.js", "TypeScript", "Tailwind CSS"],
+            year: "2024",
+          },
+          {
+            n: "07",
+            name: "Manejo Apícola Inteligente",
+            tag: "Mobile · Agro · IA",
+            desc: "App mobile para registro e gerenciamento de apiários. Funciona 100% offline. Registro por voz (Speech-to-Text Android nativo). IA em nuvem para insights. Voltado a apicultores, estudantes e pesquisadores.",
+            tech: ["React Native", "Expo", "Android", "SQLite", "Speech-to-Text", "IA Cloud", "Express"],
+            year: "2025",
+          },
+        ];
+        const features = [
+          {
+            icon: "📈",
+            title: "Dashboard completo",
+            desc: "Média glicêmica, tempo no alvo, gráfico 24h",
+          },
+          {
+            icon: "🎙️",
+            title: "Registro por Voz + IA",
+            desc: "Fale o registro, a IA preenche automaticamente",
+          },
+          {
+            icon: "📸",
+            title: "Análise de Refeição",
+            desc: "Foto do prato → macros + calculadora de bolus (Gemini Vision)",
+          },
+          {
+            icon: "🔬",
+            title: "Análise de Exames PDF",
+            desc: "Upload de PDF → IA extrai HbA1c, colesterol e mais",
+          },
+          {
+            icon: "🤝",
+            title: "Plataforma Médico-Paciente",
+            desc: "Profissionais visualizam dados em tempo real",
+          },
+          {
+            icon: "💬",
+            title: "Chat com IA",
+            desc: "Converse com seus dados em linguagem natural + voz",
+          },
+          {
+            icon: "📊",
+            title: "Relatórios + TIR",
+            desc: "Exporta PDF com métricas clínicas para consultas",
+          },
+          {
+            icon: "💡",
+            title: "Insights Semanais",
+            desc: "A IA analisa dados e gera resumo inteligente semanal",
+          },
+        ];
+        return (
+          <section
+            id="projetos"
+            style={{
+              position: "relative",
+              padding: "140px 0",
+              borderTop: "1px solid var(--line)",
+            }}
+          >
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                pointerEvents: "none",
+                background:
+                  "radial-gradient(ellipse at 60% 20%,rgba(var(--accent-rgb),0.07),transparent 60%)",
+              }}
+            />
+            <div
+              className="container"
+              style={{ position: "relative", zIndex: 2 }}
+            >
+              <div
+                style={{
+                  marginBottom: 60,
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 18,
+                }}
+              >
+                <span className="eyebrow">
+                  <span className="dot" />
+                  03 / PROJETOS
+                </span>
+                <h2
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: "clamp(36px,5vw,64px)",
+                    fontWeight: 600,
+                    letterSpacing: "-0.04em",
+                    lineHeight: 1.05,
+                    margin: 0,
+                    color: "var(--ink)",
+                  }}
+                >
+                  O que construo.
+                  <br />
+                  <span style={{ color: "var(--accent)" }}>
+                    código que impacta.
+                  </span>
+                </h2>
+              </div>
+
+              <div style={{ marginBottom: 16 }}>
+                <span className="eyebrow" style={{ color: "var(--accent)" }}>
+                  <span className="dot" />
+                  PROJETO ESTRELA
+                </span>
+              </div>
+
+              <div className="featured-card" style={{ marginBottom: 20 }}>
+                <div className="featured-glow" />
+                <div className="feat-split">
+                  <div style={{ padding: "40px" }}>
+                    <div
+                      style={{
+                        display: "inline-flex",
+                        gap: 6,
+                        alignItems: "center",
+                        fontFamily: "var(--font-mono)",
+                        fontSize: 10,
+                        color: "var(--ink-dim)",
+                        letterSpacing: "0.1em",
+                        marginBottom: 24,
+                        background: "rgba(0,0,0,0.2)",
+                        padding: "5px 10px",
+                        border: "1px solid var(--line)",
+                      }}
+                    >
+                      <span style={{ color: "var(--accent-3)" }}>●</span>IA ·
+                      Saúde · Diabetes · 2025
+                    </div>
+                    <div
+                      className="float-anim"
+                      style={{ fontSize: 64, marginBottom: 20 }}
+                    >
+                      🤖
+                    </div>
+                    <h3
+                      style={{
+                        fontFamily: "var(--font-display)",
+                        fontSize: "clamp(40px,6vw,80px)",
+                        fontWeight: 700,
+                        letterSpacing: "-0.05em",
+                        lineHeight: 0.9,
+                        margin: "0 0 16px",
+                        background:
+                          "linear-gradient(135deg,var(--ink) 0%,var(--accent) 100%)",
+                        WebkitBackgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
+                        backgroundClip: "text",
+                      }}
+                    >
+                      GlicemIA
+                    </h3>
+                    <p
+                      style={{
+                        fontFamily: "var(--font-display)",
+                        fontSize: "clamp(14px,1.8vw,20px)",
+                        color: "var(--ink)",
+                        margin: "0 0 16px",
+                      }}
+                    >
+                      Seu assistente inteligente para o controle glicêmico.
+                    </p>
+                    <p
+                      style={{
+                        fontFamily: "var(--font-mono)",
+                        fontSize: 13.5,
+                        lineHeight: 1.8,
+                        color: "var(--ink-dim)",
+                        margin: "0 0 24px",
+                        maxWidth: 500,
+                      }}
+                    >
+                      Plataforma completa baseada em IA para monitoramento e
+                      gestão do diabetes. Registre, analise e receba insights
+                      personalizados. Gemini Vision, voz, exames PDF.
+                    </p>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexWrap: "wrap",
+                        gap: 8,
+                        marginBottom: 24,
+                      }}
+                    >
+                      {[
+                        "React",
+                        "Next.js",
+                        "Gemini AI",
+                        "TypeScript",
+                        "Firebase",
+                        "IA/Vision",
+                      ].map((t) => (
+                        <span key={t} className="tech-badge">
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                    <span
+                      style={{
+                        display: "flex",
+                        gap: 6,
+                        alignItems: "center",
+                        fontFamily: "var(--font-mono)",
+                      }}
+                    >
+                      <span style={{ color: "var(--accent-3)" }}>›</span>
+                      <span style={{ color: "var(--ink-dim)", fontSize: 12 }}>
+                        made by eltobsjr · 2025
+                      </span>
+                    </span>
+                  </div>
+                  <div className="feat-right">
+                    <div
+                      style={{
+                        fontFamily: "var(--font-mono)",
+                        fontSize: 12,
+                        marginBottom: 20,
+                        color: "var(--ink-dim)",
+                      }}
+                    >
+                      <span style={{ color: "var(--accent-2)" }}>
+                        // funcionalidades
+                      </span>
+                    </div>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: 14,
+                        marginBottom: 24,
+                      }}
+                    >
+                      {features.map((f, i) => (
+                        <div
+                          key={i}
+                          style={{
+                            display: "flex",
+                            gap: 12,
+                            alignItems: "flex-start",
+                          }}
+                        >
+                          <span style={{ fontSize: 15 }}>{f.icon}</span>
+                          <div>
+                            <div
+                              style={{
+                                fontFamily: "var(--font-display)",
+                                fontSize: 14,
+                                fontWeight: 600,
+                                color: "var(--ink)",
+                                marginBottom: 2,
+                              }}
+                            >
+                              {f.title}
+                            </div>
+                            <div
+                              style={{
+                                fontFamily: "var(--font-mono)",
+                                fontSize: 12,
+                                color: "var(--ink-dim)",
+                                lineHeight: 1.5,
+                              }}
+                            >
+                              {f.desc}
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    <div
+                      style={{
+                        display: "flex",
+                        gap: 8,
+                        fontFamily: "var(--font-mono)",
+                        fontSize: 10,
+                        color: "var(--ink-muted)",
+                        lineHeight: 1.5,
+                        padding: "12px",
+                        background: "rgba(255,255,255,0.03)",
+                        border: "1px solid var(--line)",
+                      }}
+                    >
+                      <span>!</span>
+                      <span>
+                        As sugestões da IA não substituem aconselhamento médico
+                        profissional.
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div style={{ marginTop: 60, marginBottom: 32 }}>
+                <span className="eyebrow">
+                  <span className="dot" />
+                  OUTROS PROJETOS
+                </span>
+              </div>
+              <div className="project-grid">
+                {others.map((p, i) => (
+                  <div
+                    key={i}
+                    className="project-card"
+                    style={{ padding: "28px 26px" }}
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "flex-start",
+                        marginBottom: 16,
+                      }}
+                    >
+                      <div>
+                        <span
+                          style={{
+                            fontFamily: "var(--font-mono)",
+                            fontSize: 10,
+                            color: "var(--ink-muted)",
+                          }}
+                        >
+                          {p.n}
+                        </span>
+                        <div
+                          style={{
+                            fontFamily: "var(--font-mono)",
+                            fontSize: 10,
+                            color: "var(--accent)",
+                            marginTop: 4,
+                          }}
+                        >
+                          {p.tag}
+                        </div>
+                      </div>
+                      <span
+                        style={{
+                          fontFamily: "var(--font-mono)",
+                          fontSize: 10,
+                          color: "var(--ink-muted)",
+                        }}
+                      >
+                        {p.year}
+                      </span>
+                    </div>
+                    <h4
+                      style={{
+                        fontFamily: "var(--font-display)",
+                        fontSize: "clamp(18px,2vw,24px)",
+                        fontWeight: 600,
+                        letterSpacing: "-0.02em",
+                        margin: "0 0 12px",
+                        color: "var(--ink)",
+                      }}
+                    >
+                      {p.name}
+                    </h4>
+                    <p
+                      style={{
+                        fontFamily: "var(--font-mono)",
+                        fontSize: 13,
+                        lineHeight: 1.7,
+                        color: "var(--ink-dim)",
+                        margin: "0 0 20px",
+                      }}
+                    >
+                      {p.desc}
+                    </p>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexWrap: "wrap",
+                        gap: 6,
+                      }}
+                    >
+                      {p.tech.map((t) => (
+                        <span key={t} className="tech-badge">
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        );
+      }
+
+      /* ── STACK TICKER ── */
+      function StackTicker() {
+        const items = [
+          "Java","JavaScript","TypeScript","Python","C++","HTML","CSS",
+          "Spring Boot","Node.js","Express","Hono","Prisma","Maven",
+          "React","Next.js","Angular","Vite","Tailwind CSS","Framer Motion",
+          "PostgreSQL","MongoDB","Supabase","Firebase",
+          "Gemini AI","Vision API","Machine Learning","Criação de IAs",
+          "Arduino","Raspberry Pi","JWT","Git","Docker","React Native","Expo","SQLite",
+        ];
+        const all = [...items, ...items];
+        return (
+          <div className="ticker-wrap">
+            <div className="ticker-track">
+              {all.map((item, i) => (
+                <span key={i} className="ticker-item">
+                  <span className="ticker-dot" />
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
+        );
+      }
+
+      /* ── 04 / ARSENAL ── */
+      function TechStack() {
+        const cats = [
+          {
+            label: "Linguagens",
+            cmd: "ls ./languages",
+            items: [
+              "Java",
+              "JavaScript",
+              "TypeScript",
+              "Python",
+              "C++",
+              "HTML",
+              "CSS",
+            ],
+          },
+          {
+            label: "Backend",
+            cmd: "ls ./backend",
+            items: [
+              "Spring Boot",
+              "Node.js",
+              "Express",
+              "Hono",
+              "Prisma",
+              "Maven",
+            ],
+          },
+          {
+            label: "Frontend",
+            cmd: "ls ./frontend",
+            items: [
+              "React",
+              "Next.js",
+              "Angular",
+              "Vite",
+              "Tailwind CSS",
+              "Framer Motion",
+            ],
+          },
+          {
+            label: "Banco de Dados",
+            cmd: "ls ./databases",
+            items: ["PostgreSQL", "MongoDB", "Supabase", "Firebase"],
+          },
+          {
+            label: "Inteligência Artificial",
+            cmd: "ls ./ai",
+            items: ["Gemini AI", "Vision API", "NLP", "Machine Learning", "Criação de IAs"],
+          },
+          {
+            label: "Outros",
+            cmd: "ls ./outros",
+            items: [
+              "Arduino",
+              "Raspberry Pi",
+              "JWT",
+              "Git",
+              "Docker",
+              "Apache Cordova",
+            ],
+          },
+        ];
+        return (
+          <section
+            id="arsenal"
+            style={{ padding: "140px 0", borderTop: "1px solid var(--line)" }}
+          >
+            <div className="container">
+              <div
+                style={{
+                  marginBottom: 60,
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 18,
+                }}
+              >
+                <span className="eyebrow">
+                  <span className="dot" />
+                  04 / ARSENAL
+                </span>
+                <h2
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: "clamp(36px,5vw,64px)",
+                    fontWeight: 600,
+                    letterSpacing: "-0.04em",
+                    lineHeight: 1.05,
+                    margin: 0,
+                    color: "var(--ink)",
+                  }}
+                >
+                  Meu stack.
+                  <br />
+                  <span style={{ color: "var(--ink-muted)" }}>
+                    // ferramentas de combate
+                  </span>
+                </h2>
+              </div>
+              <StackTicker />
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(auto-fill,minmax(280px,1fr))",
+                  gap: 20,
+                  marginBottom: 60,
+                }}
+              >
+                {cats.map((cat, i) => (
+                  <div key={i} className="card" style={{ padding: "24px" }}>
+                    <div style={{ marginBottom: 18 }}>
+                      <span
+                        style={{
+                          display: "block",
+                          fontFamily: "var(--font-mono)",
+                          fontSize: 10,
+                          letterSpacing: "0.14em",
+                          color: "var(--accent)",
+                          textTransform: "uppercase",
+                          marginBottom: 8,
+                        }}
+                      >
+                        {cat.label}
+                      </span>
+                      <code
+                        style={{
+                          fontFamily: "var(--font-mono)",
+                          fontSize: 11,
+                          color: "var(--ink-dim)",
+                        }}
+                      >
+                        <span style={{ color: "var(--accent-3)" }}>$</span>{" "}
+                        {cat.cmd}
+                      </code>
+                    </div>
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: 7 }}>
+                      {cat.items.map((item) => (
+                        <span key={item} className="tech-badge">
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                    {cat.note && (
+                      <div style={{ marginTop: 12, fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--accent-2)", letterSpacing: "0.04em" }}>
+                        {cat.note}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+              <div
+                style={{ borderTop: "1px solid var(--line)", paddingTop: 48 }}
+              >
+                <div className="code" style={{ maxWidth: 640 }}>
+                  <div className="line">
+                    <span className="ln">1</span>
+                    <span>
+                      <span className="kw">const</span>{" "}
+                      <span className="fn">developer</span> = {"{"}
+                    </span>
+                  </div>
+                  <div className="line">
+                    <span className="ln">2</span>
+                    <span>
+                      {" "}
+                      <span className="fn">name</span>:{" "}
+                      <span className="str">
+                        "Elto Borges dos Santos Junior"
+                      </span>
+                      ,
+                    </span>
+                  </div>
+                  <div className="line">
+                    <span className="ln">3</span>
+                    <span>
+                      {" "}
+                      <span className="fn">alias</span>:{" "}
+                      <span className="str">"eltobsjr"</span>,
+                    </span>
+                  </div>
+                  <div className="line">
+                    <span className="ln">4</span>
+                    <span>
+                      {" "}
+                      <span className="fn">role</span>:{" "}
+                      <span className="str">"Full Stack Developer"</span>,
+                    </span>
+                  </div>
+                  <div className="line">
+                    <span className="ln">5</span>
+                    <span>
+                      {" "}
+                      <span className="fn">location</span>:{" "}
+                      <span className="str">"Piauí, Brasil 🇧🇷"</span>,
+                    </span>
+                  </div>
+                  <div className="line">
+                    <span className="ln">6</span>
+                  </div>
+                  <div className="line">
+                    <span className="ln">7</span>
+                    <span>
+                      {" "}
+                      <span className="fn">lattes</span>:{" "}
+                      <span className="str">"cnpq.br/2870235105898473"</span>,
+                    </span>
+                  </div>
+                  <div className="line">
+                    <span className="ln">8</span>
+                    <span>
+                      {"}"}
+                      <span className="com">; // born 19/06/2007</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        );
+      }
+
+      /* ── 05 / CONTATO ── */
+      function Contact() {
+        const links = [
+          {
+            label: "LinkedIn",
+            handle: "elto-borges-8730b8384",
+            url: "https://www.linkedin.com/in/elto-borges-8730b8384",
+            icon: "in",
+            color: "#0077B5",
+          },
+          {
+            label: "GitHub",
+            handle: "eltobsjr",
+            url: "https://github.com/eltobsjr",
+            icon: "gh",
+            color: "#e8e8ea",
+          },
+          {
+            label: "WhatsApp",
+            handle: "+55 89 9941-2788",
+            url: "https://wa.me/5589994127883?text=Olá, Elto! Vim pelo seu portfólio.",
+            icon: "wa",
+            color: "#25D366",
+          },
+          {
+            label: "Gmail",
+            handle: "eltobsjr.developer",
+            url: "mailto:eltobsjr.developer@gmail.com",
+            icon: "gm",
+            color: "#D14836",
+          },
+          {
+            label: "Instagram",
+            handle: "@eltobsjr",
+            url: "https://www.instagram.com/eltobsjr/",
+            icon: "ig",
+            color: "#E1306C",
+          },
+          {
+            label: "YouTube",
+            handle: "@eltobsjr",
+            url: "https://www.youtube.com/@eltobsjr",
+            icon: "yt",
+            color: "#FF0000",
+          },
+          {
+            label: "Lattes CNPq",
+            handle: "2870235105898473",
+            url: "https://lattes.cnpq.br/2870235105898473",
+            icon: "lt",
+            color: "#00d4ff",
+          },
+        ];
+        return (
+          <section
+            id="contato"
+            style={{ padding: "140px 0", borderTop: "1px solid var(--line)" }}
+          >
+            <div className="container">
+              <div
+                style={{
+                  marginBottom: 60,
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 18,
+                }}
+              >
+                <span className="eyebrow">
+                  <span className="dot" />
+                  05 / CONTATO
+                </span>
+                <h2
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: "clamp(36px,5.5vw,72px)",
+                    fontWeight: 600,
+                    letterSpacing: "-0.04em",
+                    lineHeight: 1.02,
+                    margin: 0,
+                    color: "var(--ink)",
+                  }}
+                >
+                  Vamos construir
+                  <br />
+                  <span style={{ color: "var(--accent)" }}>algo juntos.</span>
+                </h2>
+                <p
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: 14,
+                    color: "var(--ink-dim)",
+                    margin: 0,
+                    lineHeight: 1.7,
+                  }}
+                >
+                  Aberto a freelas, colaborações, estágios e projetos
+                  inovadores.
+                  <br />
+                  Escolha o canal:
+                </p>
+              </div>
+              <div className="contact-grid">
+                {links.map((l, i) => (
+                  <a
+                    key={i}
+                    href={l.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="contact-item"
+                  >
+                    <div
+                      style={{
+                        width: 40,
+                        height: 40,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        flexShrink: 0,
+                        background: `${l.color}22`,
+                        border: `1px solid ${l.color}44`,
+                        color: l.color,
+                      }}
+                    >
+                      <span
+                        style={{
+                          fontFamily: "var(--font-mono)",
+                          fontSize: 11,
+                          fontWeight: 600,
+                        }}
+                      >
+                        {l.icon}
+                      </span>
+                    </div>
+                    <div>
+                      <div
+                        style={{
+                          fontFamily: "var(--font-display)",
+                          fontSize: 15,
+                          fontWeight: 600,
+                          color: "var(--ink)",
+                          marginBottom: 2,
+                        }}
+                      >
+                        {l.label}
+                      </div>
+                      <div
+                        style={{
+                          fontFamily: "var(--font-mono)",
+                          fontSize: 11,
+                          color: "var(--ink-dim)",
+                        }}
+                      >
+                        {l.handle}
+                      </div>
+                    </div>
+                    <span
+                      style={{
+                        marginLeft: "auto",
+                        color: "var(--accent)",
+                        fontFamily: "var(--font-mono)",
+                        fontSize: 12,
+                      }}
+                    >
+                      →
+                    </span>
+                  </a>
+                ))}
+              </div>
+              <div
+                style={{
+                  marginTop: 60,
+                  border: "1px solid var(--line)",
+                  background: "var(--bg-1)",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    padding: "40px 44px",
+                    gap: 24,
+                    flexWrap: "wrap",
+                  }}
+                >
+                  <div>
+                    <div
+                      style={{
+                        fontFamily: "var(--font-mono)",
+                        fontSize: 10,
+                        letterSpacing: "0.14em",
+                        color: "var(--accent)",
+                        marginBottom: 10,
+                        textTransform: "uppercase",
+                      }}
+                    >
+                      resposta rápida
+                    </div>
+                    <h3
+                      style={{
+                        fontFamily: "var(--font-display)",
+                        fontSize: "clamp(22px,3vw,36px)",
+                        fontWeight: 600,
+                        letterSpacing: "-0.03em",
+                        margin: 0,
+                        color: "var(--ink)",
+                      }}
+                    >
+                      Prefere o email direto?
+                    </h3>
+                    <p
+                      style={{
+                        fontFamily: "var(--font-mono)",
+                        fontSize: 13,
+                        color: "var(--ink-dim)",
+                        margin: "12px 0 0",
+                        lineHeight: 1.7,
+                      }}
+                    >
+                      eltobsjr.developer@gmail.com
+                    </p>
+                  </div>
+                  <a href="mailto:eltobsjr.developer@gmail.com" className="btn">
+                    Enviar Email<span className="arrow">→</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
+        );
+      }
+
+      /* ── FOOTER ── */
+      function Footer() {
+        return (
+          <footer
+            style={{
+              borderTop: "1px solid var(--line)",
+              padding: "48px 0 32px",
+            }}
+          >
+            <div className="container">
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  marginBottom: 32,
+                  flexWrap: "wrap",
+                  gap: 16,
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                  <span style={{ color: "var(--accent)", fontSize: 20 }}>
+                    ▍
+                  </span>
+                  <span
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      fontWeight: 600,
+                      letterSpacing: "0.06em",
+                    }}
+                  >
+                    ELTO::DEV
+                  </span>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    gap: 24,
+                    fontFamily: "var(--font-mono)",
+                    fontSize: 12,
+                    color: "var(--ink-dim)",
+                    flexWrap: "wrap",
+                  }}
+                >
+                  {["#sobre", "#projetos", "#arsenal", "#contato"].map(
+                    (h, i) => (
+                      <a
+                        key={h}
+                        href={h}
+                        style={{ transition: "color 0.15s ease" }}
+                      >
+                        {["./sobre", "./projetos", "./arsenal", "./contato"][i]}
+                      </a>
+                    ),
+                  )}
+                </div>
+              </div>
+              <div
+                style={{
+                  height: 1,
+                  background:
+                    "linear-gradient(90deg,transparent,var(--line-2),transparent)",
+                  marginBottom: 28,
+                }}
+              />
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  flexWrap: "wrap",
+                  gap: 16,
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: 11,
+                    color: "var(--ink-muted)",
+                  }}
+                >
+                  © 2026 Elto Borges dos Santos Junior ·{" "}
+                  <span style={{ color: "var(--accent)" }}>eltobsjr</span>
+                </span>
+                <span
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: 10,
+                    color: "var(--ink-muted)",
+                  }}
+                >
+                  IFPI PICOS · IBICT · Piauí, Brasil 🇧🇷
+                </span>
+                <div style={{ display: "flex", gap: 12 }}>
+                  {[
+                    { url: "https://github.com/eltobsjr", l: "GH" },
+                    {
+                      url: "https://www.linkedin.com/in/elto-borges-8730b8384",
+                      l: "IN",
+                    },
+                    { url: "https://wa.me/5589994127883", l: "WA" },
+                  ].map((x) => (
+                    <a
+                      key={x.l}
+                      href={x.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        fontFamily: "var(--font-mono)",
+                        fontSize: 10,
+                        letterSpacing: "0.12em",
+                        color: "var(--ink-muted)",
+                        padding: "4px 8px",
+                        border: "1px solid transparent",
+                        transition: "all 0.15s ease",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.borderColor =
+                          "rgba(var(--accent-rgb),0.4)";
+                        e.currentTarget.style.color = "var(--ink)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.borderColor = "transparent";
+                        e.currentTarget.style.color = "var(--ink-muted)";
+                      }}
+                    >
+                      {x.l}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </footer>
+        );
+      }
+
+      window.AboutTerminal = AboutTerminal;
+      window.Education = Education;
+      window.Projects = Projects;
+      window.TechStack = TechStack;
+      window.Contact = Contact;
+      window.Footer = Footer;
+    </script>
+
+    <!-- APP -->
+    <script type="text/babel">
+      const { useState: useState3, useEffect: useEffect3 } = React;
+      const ACCENTS = {
+        purple: { c: "#7c3aed", rgb: "124,58,237" },
+        blue: { c: "#00d4ff", rgb: "0,212,255" },
+        green: { c: "#00ff9f", rgb: "0,255,159" },
+      };
+      const GLITCH = { off: 0, subtle: 0.5, strong: 1.2 };
+
+      function App() {
+        const [booted, setBooted] = useState3(false);
+        const [theme, setTheme] = useState3("dark");
+        const [accent, setAccent] = useState3("purple");
+        const [glitch, setGlitch] = useState3("subtle");
+        const [matrix, setMatrix] = useState3(true);
+        const [scanlines, setScanlines] = useState3(true);
+        const [open, setOpen] = useState3(false);
+
+        useEffect3(() => {
+          const r = document.documentElement;
+          const a = ACCENTS[accent] || ACCENTS.purple;
+          r.style.setProperty("--accent", a.c);
+          r.style.setProperty("--accent-rgb", a.rgb);
+          r.style.setProperty(
+            "--glitch-intensity",
+            String(GLITCH[glitch] ?? 0.5),
+          );
+          r.style.setProperty("--scanline-opacity", scanlines ? "0.06" : "0");
+          r.setAttribute("data-theme", theme);
+        }, [theme, accent, glitch, scanlines]);
+
+        const TBtn = ({ active, onClick, children }) => (
+          <button
+            onClick={onClick}
+            style={{
+              flex: 1,
+              padding: "5px 0",
+              fontFamily: "var(--font-mono)",
+              fontSize: 10,
+              letterSpacing: "0.06em",
+              color: active ? "var(--invert-text)" : "var(--ink-dim)",
+              background: active ? "var(--accent)" : "transparent",
+              border: active
+                ? "1px solid var(--accent)"
+                : "1px solid var(--line-2)",
+              cursor: "pointer",
+            }}
+          >
+            {children}
+          </button>
+        );
+        const TRow = ({ label, children }) => (
+          <div style={{ marginBottom: 14 }}>
+            <div
+              style={{
+                color: "var(--accent)",
+                fontSize: 9,
+                letterSpacing: "0.16em",
+                marginBottom: 6,
+              }}
+            >
+              {label}
+            </div>
+            <div style={{ display: "flex", gap: 6 }}>{children}</div>
+          </div>
+        );
+        const TToggle = ({ label, value, onChange }) => (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              marginBottom: 10,
+            }}
+          >
+            <span
+              style={{
+                color: "var(--ink-dim)",
+                letterSpacing: "0.1em",
+                fontSize: 9,
+              }}
+            >
+              {label}
+            </span>
+            <button
+              onClick={() => onChange(!value)}
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 10,
+                padding: "4px 10px",
+                color: value ? "var(--accent-3)" : "var(--ink-muted)",
+                border: `1px solid ${value ? "rgba(var(--accent-3-rgb),0.4)" : "var(--line-2)"}`,
+                background: value
+                  ? "rgba(var(--accent-3-rgb),0.08)"
+                  : "transparent",
+                cursor: "pointer",
+              }}
+            >
+              {value ? "ON" : "OFF"}
+            </button>
+          </div>
+        );
+
+        return (
+          <>
+            {!booted && <Boot onDone={() => setBooted(true)} />}
+            <div
+              style={{
+                opacity: booted ? 1 : 0,
+                transition: "opacity 0.5s ease",
+              }}
+            >
+              <Hero matrix={matrix} theme={theme} onThemeChange={setTheme} />
+              <AboutTerminal />
+              <Education />
+              <Projects />
+              <TechStack />
+              <Contact />
+              <Footer />
+            </div>
+            <button
+              onClick={() => setOpen((o) => !o)}
+              title="Personalizar visual"
+              style={{
+                position: "fixed",
+                bottom: 24,
+                right: 24,
+                zIndex: 40,
+                width: 44,
+                height: 44,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                background: "var(--bg-1)",
+                border: "1px solid var(--line-2)",
+                cursor: "pointer",
+                color: "var(--ink-dim)",
+                fontFamily: "var(--font-mono)",
+                fontSize: 16,
+              }}
+            >
+              ⚙
+            </button>
+            {open && (
+              <div
+                style={{
+                  position: "fixed",
+                  bottom: 76,
+                  right: 24,
+                  zIndex: 39,
+                  background: "var(--bg-1)",
+                  border: "1px solid var(--line-2)",
+                  padding: "20px",
+                  width: 240,
+                  fontFamily: "var(--font-mono)",
+                  fontSize: 11,
+                  boxShadow: "0 8px 40px rgba(0,0,0,0.5)",
+                }}
+              >
+                <div
+                  style={{
+                    color: "var(--ink-dim)",
+                    letterSpacing: "0.14em",
+                    marginBottom: 16,
+                    fontSize: 10,
+                  }}
+                >
+                  // TWEAKS
+                </div>
+                <TRow label="TEMA">
+                  <TBtn
+                    active={theme === "dark"}
+                    onClick={() => setTheme("dark")}
+                  >
+                    Escuro
+                  </TBtn>
+                  <TBtn
+                    active={theme === "light"}
+                    onClick={() => setTheme("light")}
+                  >
+                    Claro
+                  </TBtn>
+                  <TBtn active={theme === "hc"} onClick={() => setTheme("hc")}>
+                    HC
+                  </TBtn>
+                </TRow>
+                <TRow label="ACENTO">
+                  <TBtn
+                    active={accent === "purple"}
+                    onClick={() => setAccent("purple")}
+                  >
+                    Roxo
+                  </TBtn>
+                  <TBtn
+                    active={accent === "blue"}
+                    onClick={() => setAccent("blue")}
+                  >
+                    Azul
+                  </TBtn>
+                  <TBtn
+                    active={accent === "green"}
+                    onClick={() => setAccent("green")}
+                  >
+                    Verde
+                  </TBtn>
+                </TRow>
+                <TRow label="GLITCH">
+                  <TBtn
+                    active={glitch === "off"}
+                    onClick={() => setGlitch("off")}
+                  >
+                    Off
+                  </TBtn>
+                  <TBtn
+                    active={glitch === "subtle"}
+                    onClick={() => setGlitch("subtle")}
+                  >
+                    Sutil
+                  </TBtn>
+                  <TBtn
+                    active={glitch === "strong"}
+                    onClick={() => setGlitch("strong")}
+                  >
+                    Forte
+                  </TBtn>
+                </TRow>
+                <TToggle
+                  label="SCANLINES"
+                  value={scanlines}
+                  onChange={setScanlines}
+                />
+                <TToggle
+                  label="MATRIX RAIN"
+                  value={matrix}
+                  onChange={setMatrix}
+                />
+              </div>
+            )}
+          </>
+        );
+      }
+
+      ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+    </script>
+  </body>
+</html>
